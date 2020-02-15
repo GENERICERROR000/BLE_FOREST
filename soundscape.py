@@ -1,13 +1,3 @@
-# import simpleaudio as sa
-
-# files = ['wind.wav']
-
-# for filename in files:
-#     sound_obj = sa.WaveObject.from_wave_file(filename)
-#     play_obj = sound_obj.play()
-#     play_obj.wait_done()
-
-
 import pygame
 import time
 import threading
