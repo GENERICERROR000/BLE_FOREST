@@ -1,8 +1,12 @@
+#!/usr/bin/env python3
+# created: 20/14/2020
+# authors: Noah Kernis & Sue Roh
+
 import pygame
 import time
 import threading
 
-directory = 'media/'
+media = 'media/'
 files = ['rain.wav', 'frogs.wav', 'waterfall.wav']
 loop_files = ['frogs.wav']
 
