@@ -159,8 +159,9 @@ aml_tawny_owl_call_path = mda_dir + aml_dir + aml_tawny_owl_call + '.wav'
 aml_woodpecker_pecking_path = mda_dir + \
     aml_dir + aml_woodpecker_pecking + '.wav'
 
+AAA = aml_blackbird_path
 
-TEST_ANIMAL_SOUND = pygame.mixer.Sound(aml_blackbird_path)
+TEST_ANIMAL_SOUND = pygame.mixer.Sound(AAA)
 TEST_ANIMAL_SOUND.set_volume(0.4)
 
 duration = TEST_ANIMAL_SOUND.get_length()
@@ -168,7 +169,7 @@ duration = TEST_ANIMAL_SOUND.get_length()
 # play sound randomly
 while True:
     if random.randint(0, 1000000) == 10:
-        print("hit")
+		print(AAA, "duration:", duration)
         pygame.mixer.find_channel(True).play(TEST_ANIMAL_SOUND)
         # pygame.mixer.find_channel(True).play(TEST_ANIMAL_sound, maxtime=500)
 
