@@ -22,7 +22,6 @@
 
 ### Code
 
-- http://soundbible.com/
 - https://www.pygame.org/docs/ref/music.html
 - https://github.com/hexway/apple_bleee
 
@@ -32,6 +31,7 @@
 
 ### Sounds
 
+- http://soundbible.com/
 - *Background*
 	- http://soundbible.com/1818-Rainforest-Ambience.html
 	- http://soundbible.com/2124-45min-April-Rainstorm.html
@@ -43,7 +43,6 @@
 - *Animals*
 	- http://soundbible.com/2033-Frogs.html#Frogs%20Sound
 	- http://soundbible.com/2180-Meadowlark.html
-	- http://soundbible.com/2145-Gibbon-Monkey.html
 	- http://soundbible.com/1849-Killdeer-Song.html
 	- http://soundbible.com/1846-Warbling-Vireo.html
 	- http://soundbible.com/1843-Bluejay-Call-2.html
