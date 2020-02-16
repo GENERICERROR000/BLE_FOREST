@@ -10,11 +10,14 @@ mda_dir = 'media/'
 bg_dir = 'background/'
 aml_dir = 'animal/'
 
-# TODO: pick 
-animal_sounds = ['rain.wav', 'frogs.wav', 'waterfall.wav']
+aml_snd_american_woodcock = 'american_woodcock'
+aml_snd_bluejay = 'bluejay_0'
+aml_snd_frogs = 'frogs'
+aml_snd_killdeer = 'killdeer_0'
+aml_snd_meadowlark = 'meadowlark'
 
-# TODO: pick bg sounds
-loop_files = ['frogs.wav']
+bg_snd_0 = 'nature_ambiance'
+bg_snd_1 = 'forest_ambiance'
 
 pygame.mixer.init()
 
@@ -29,9 +32,21 @@ idx_5 = 5
 idx_6 = 6
 idx_7 = 7
 
+def handle_new_data(data):
+	print("new data", data)
+
+# def which_type(data):
+#     switch = {
+#         "os_a": "January",
+#         "os_b": "February",
+#     }
+    
+# 	func = switch.get(data.type)
+# 	print(func, "invalid os")
+# 	return func
+
 def play_sound(sound, sec, idx):
     pygame.mixer.Channel(idx).play(sound, -1, sec)
-
 
 for filename in files:
     pygame.mixer.music.load(media + filename)
@@ -50,11 +65,11 @@ for filename in loop_files:
     setInterval(playsounds, 1)
     idx += 1
 
-# plays occasional thunder sounds
-duration = var.thunder_sound.get_length()  # duration of thunder in seconds
-while True:  # infinite while-loop
-    # play thunder sound if random condition met
-    if random.randint(0, 80) == 10:
-        channel2.play(var.thunder_sound)
-    # pause while-loop for duration of thunder
-    time.sleep(duration)
+# # plays occasional thunder sounds
+# duration = var.thunder_sound.get_length()  # duration of thunder in seconds
+# while True:  # infinite while-loop
+#     # play thunder sound if random condition met
+#     if random.randint(0, 80) == 10:
+#         channel2.play(var.thunder_sound)
+#     # pause while-loop for duration of thunder
+#     time.sleep(duration)
