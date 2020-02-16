@@ -9,6 +9,7 @@ import time
 
 # -----> Media <-----
 
+
 # dirs
 mda_dir = 'media/'
 bg_dir = 'background/'
@@ -17,6 +18,9 @@ aml_dir = 'animal/'
 # background sounds
 bg_rainforest_ambiance = 'rainforest_ambiance'
 bg_nature_ambiance = 'nature_ambiance'
+bg_rain = 'rain'
+bg_waterfall = 'waterfall'
+bg_wetlands = 'wetlands'
 
 bg_gentle_rain = 'gentle_rain'
 bg_light_rain = 'light_rain'
@@ -33,7 +37,7 @@ aml_peacock = 'peacock'
 aml_warbling_vireo = 'warbling_vireo'
 
 aml_blackbird = 'blackbird'
-aml_bobwhite_quail_call = 'bobwhite_quail_call'
+aml_quail_call = 'quail_call'
 aml_crane_call = 'crane_call'
 aml_crow = 'crow'
 aml_cuckoo_bird_song = 'cuckoo_bird_song'
@@ -42,6 +46,7 @@ aml_tawny_owl_call = 'tawny_owl_call'
 aml_woodpecker_pecking = 'woodpecker_pecking'
 
 # -----> Init Audio <-----
+
 
 bg_sound_volume = 0.5
 
@@ -52,6 +57,19 @@ pygame.init()
 
 # set number of channels (default: 8)
 pygame.mixer.set_num_channels(500)
+
+
+# not reviewed yet
+bg_nature_ambiance_path = mda_dir + bg_dir + bg_nature_ambiance + '.wav'
+bg_rain_path = mda_dir + bg_dir + bg_rain + '.wav'
+bg_waterfall_path = mda_dir + bg_dir + bg_waterfall + '.wav'
+bg_wetlands_path = mda_dir + bg_dir + bg_wetlands + '.wav'
+
+bg_gentle_rain_path = mda_dir + bg_dir + bg_gentle_rain + '.wav'
+bg_light_rain_path = mda_dir + bg_dir + bg_light_rain + '.wav'
+bg_thunder_lightning_rain_path = mda_dir + \
+    bg_dir + bg_thunder_lightning_rain + '.wav'
+
 
 # load bg sound
 bg_path = mda_dir + bg_dir + bg_rainforest_ambiance + '.wav'
@@ -69,6 +87,7 @@ pygame.mixer.music.play(loops=-1)
 def handle_new_data(data):
     print("new data", data)
 
+# NOTE: switch example
 # def which_type(data):
 #     switch = {
 #         "os_a": "January",
@@ -128,31 +147,29 @@ aml_killdeer_path = mda_dir + aml_dir + aml_killdeer + '.wav'
 
 
 # not reviewed yet
-bg_gentle_rain_path = mda_dir + bg_dir + bg_gentle_rain + '.wav'
-bg_light_rain_path = mda_dir + bg_dir + bg_light_rain + '.wav'
-bg_thunder_lightning_rain_path = mda_dir + \
-    bg_dir + bg_thunder_lightning_rain + '.wav'
-
-aml_blackbird_path = mda_dir + aml_dir + '.wav'
-aml_bobwhite_quail_call_path = mda_dir + aml_dir + '.wav'
-aml_crane_call_path = mda_dir + aml_dir + '.wav'
-aml_crow_path = mda_dir + aml_dir + '.wav'
-aml_cuckoo_bird_song_path = mda_dir + aml_dir + '.wav'
-aml_eurasian_collared_dove_call_path = mda_dir + aml_dir + '.wav'
-aml_tawny_owl_call_path = mda_dir + aml_dir + '.wav'
-aml_woodpecker_pecking_path = mda_dir + aml_dir + '.wav'
+aml_blackbird_path = mda_dir + aml_dir + aml_blackbird + '.wav'
+aml_quail_call_path = mda_dir + \
+    aml_dir + aml_quail_call + '.wav'
+aml_crane_call_path = mda_dir + aml_dir + aml_crane_call + '.wav'
+aml_crow_path = mda_dir + aml_dir + aml_crow + '.wav'
+aml_cuckoo_bird_song_path = mda_dir + aml_dir + aml_cuckoo_bird_song + '.wav'
+aml_eurasian_collared_dove_call_path = mda_dir + \
+    aml_dir + aml_eurasian_collared_dove_call + '.wav'
+aml_tawny_owl_call_path = mda_dir + aml_dir + aml_tawny_owl_call + '.wav'
+aml_woodpecker_pecking_path = mda_dir + \
+    aml_dir + aml_woodpecker_pecking + '.wav'
 
 
-TEST_ANIMAL_sound = pygame.mixer.Sound(aml_warbling_vireo_path)
-TEST_ANIMAL_sound.set_volume(0.4)
+TEST_ANIMAL_SOUND = pygame.mixer.Sound(aml_blackbird_path)
+TEST_ANIMAL_SOUND.set_volume(0.4)
 
-duration = TEST_ANIMAL_sound.get_length()
+duration = TEST_ANIMAL_SOUND.get_length()
 
 # play sound randomly
 while True:
     if random.randint(0, 1000000) == 10:
         print("hit")
-        pygame.mixer.find_channel(True).play(TEST_ANIMAL_sound)
+        pygame.mixer.find_channel(True).play(TEST_ANIMAL_SOUND)
         # pygame.mixer.find_channel(True).play(TEST_ANIMAL_sound, maxtime=500)
 
         # pause for duration audio
