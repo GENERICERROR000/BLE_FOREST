@@ -42,8 +42,6 @@ Funny one? http://soundbible.com/2039-Tree-Fall-Small.html
 	- http://soundbible.com/2180-Meadowlark.html
 	- http://soundbible.com/1849-Killdeer-Song.html
 	- http://soundbible.com/1846-Warbling-Vireo.html
-	- http://soundbible.com/1843-Bluejay-Call-2.html
-	- http://soundbible.com/1842-Bluejay-Call.html
 	- http://soundbible.com/1430-Peacock.html
 	- http://soundbible.com/1200-American-Woodcock.html
 - *Not Natural*
@@ -57,7 +55,6 @@ Funny one? http://soundbible.com/2039-Tree-Fall-Small.html
 	- http://www.orangefreesounds.com/thunder-lightning-with-rain/
 	- http://www.orangefreesounds.com/light-rain-sound-effect/
 - *Animals*
-	- http://www.orangefreesounds.com/blackbird-tweet/
 	- http://www.orangefreesounds.com/eurasian-collared-dove-call/
 	- http://www.orangefreesounds.com/woodpecker-pecking-sound/
 	- http://www.orangefreesounds.com/crow-voice/

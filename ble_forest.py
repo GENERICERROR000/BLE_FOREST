@@ -17,23 +17,17 @@ aml_dir = 'animal/'
 
 # background sounds
 bg_rainforest_ambiance = 'rainforest_ambiance'
-
 bg_gentle_rain = 'gentle_rain'
 bg_light_rain = 'light_rain'
 bg_thunder_lightning_rain = 'thunder_lightning_rain'
 
-
 # animal sounds
-aml_american_woodcock = 'american_woodcock'
-aml_bluejay_0 = 'bluejay_0'
-aml_bluejay_1 = 'bluejay_1'
 aml_frogs = 'frogs'
+aml_american_woodcock = 'american_woodcock'
 aml_killdeer = 'killdeer'
 aml_meadowlark = 'meadowlark'
 aml_peacock = 'peacock'
 aml_warbling_vireo = 'warbling_vireo'
-
-aml_blackbird = 'blackbird'
 aml_quail_call = 'quail_call'
 aml_crane_call = 'crane_call'
 aml_crow = 'crow'
@@ -79,6 +73,7 @@ pygame.mixer.music.set_volume(bg_sound_volume)
 
 # init bg sound - loop forever
 pygame.mixer.music.play(loops=-1)
+
 
 # -----> Data Handlers <-----
 
@@ -129,50 +124,59 @@ def play_sound(sound, sec, idx):
 # a sound is played. will "feel" more dynamic...?
 
 # good
-aml_american_woodcock_path = mda_dir + aml_dir + aml_american_woodcock + '.wav'
-aml_frogs_path = mda_dir + aml_dir + aml_frogs + '.wav'
-aml_peacock_path = mda_dir + aml_dir + aml_peacock + '.wav'
-
-# a lot in hear, needs edit
-aml_meadowlark_path = mda_dir + aml_dir + aml_meadowlark + '.wav'
-
-# long
-aml_warbling_vireo_path = mda_dir + aml_dir + aml_warbling_vireo + '.wav'
-
-# potentially annoying...
-aml_bluejay_0_path = mda_dir + aml_dir + aml_bluejay_0 + '.wav'
-aml_bluejay_1_path = mda_dir + aml_dir + aml_bluejay_1 + '.wav'
 aml_killdeer_path = mda_dir + aml_dir + aml_killdeer + '.wav'
-
-
-# not reviewed yet
-aml_blackbird_path = mda_dir + aml_dir + aml_blackbird + '.wav'
-aml_quail_call_path = mda_dir + \
-    aml_dir + aml_quail_call + '.wav'
-aml_crane_call_path = mda_dir + aml_dir + aml_crane_call + '.wav'
+aml_frogs_path = mda_dir + aml_dir + aml_frogs + '.wav'
+aml_american_woodcock_path = mda_dir + aml_dir + aml_american_woodcock + '.wav'
+aml_peacock_path = mda_dir + aml_dir + aml_peacock + '.wav'
 aml_crow_path = mda_dir + aml_dir + aml_crow + '.wav'
-aml_cuckoo_bird_song_path = mda_dir + aml_dir + aml_cuckoo_bird_song + '.wav'
 aml_eurasian_collared_dove_call_path = mda_dir + \
     aml_dir + aml_eurasian_collared_dove_call + '.wav'
+aml_woodpecker_pecking_path = mda_dir + aml_dir + \
+    aml_woodpecker_pecking + '.wav'  # don't overuse
+
+
+# long - needs edit
+aml_meadowlark_path = mda_dir + aml_dir + aml_meadowlark + '.wav'
+aml_warbling_vireo_path = mda_dir + aml_dir + aml_warbling_vireo + '.wav'
+aml_quail_call_path = mda_dir + aml_dir + aml_quail_call + '.wav'
+aml_crane_call_path = mda_dir + aml_dir + aml_crane_call + '.wav'
 aml_tawny_owl_call_path = mda_dir + aml_dir + aml_tawny_owl_call + '.wav'
-aml_woodpecker_pecking_path = mda_dir + \
-    aml_dir + aml_woodpecker_pecking + '.wav'
+# potentially annoying...
+aml_cuckoo_bird_song_path = mda_dir + aml_dir + aml_cuckoo_bird_song + '.wav'
 
-AAA = aml_blackbird_path
-
-TEST_ANIMAL_SOUND = pygame.mixer.Sound(AAA)
-TEST_ANIMAL_SOUND.set_volume(0.4)
-
-duration = TEST_ANIMAL_SOUND.get_length()
+CARL = [
+    aml_killdeer_path,
+    aml_frogs_path,
+    aml_american_woodcock_path,
+    aml_peacock_path,
+    aml_crow_path,
+    aml_eurasian_collared_dove_call_path,
+    aml_woodpecker_pecking_path,
+    aml_meadowlark_path,
+    aml_warbling_vireo_path,
+    aml_quail_call_path,
+    aml_crane_call_path,
+    aml_tawny_owl_call_path,
+    aml_cuckoo_bird_song_path,
+]
+duration = 0
+parth = ''
 
 # play sound randomly
-# while True:
-#     if random.randint(0, 1000000) == 10:
-#         print(AAA, "duration:", duration)
-#         pygame.mixer.find_channel(True).play(TEST_ANIMAL_SOUND)
-#         # pygame.mixer.find_channel(True).play(TEST_ANIMAL_sound, maxtime=500)
+while True:
+    if random.randint(0, 1000000) == 10:
+        parth = CARL[random.randint(0, 12)]
 
-#         # pause for duration audio
-#         time.sleep(duration)
+        test_animal_sound = pygame.mixer.Sound(parth)
+        test_animal_sound.set_volume(0.4)
 
-time.sleep(1000)
+        duration = test_animal_sound.get_length()
+
+        print(parth, 'duration:', duration)
+        pygame.mixer.find_channel(True).play(test_animal_sound)
+        # pygame.mixer.find_channel(True).play(TEST_ANIMAL_sound, maxtime=500)
+
+        # pause for duration audio
+        time.sleep(3)
+
+# time.sleep(2000)
