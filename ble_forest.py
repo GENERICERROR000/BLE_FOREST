@@ -7,8 +7,17 @@ import pygame
 import random
 import time
 
-# -----> Media <-----
+# -----> APPLE_BLE Data <-----
 
+currentState = {
+
+}
+
+deviceTypes = {
+
+}
+
+# -----> Media <-----
 
 # dirs
 mda_dir = 'media/'
@@ -133,7 +142,6 @@ aml_eurasian_collared_dove_call_path = mda_dir + \
     aml_dir + aml_eurasian_collared_dove_call + '.wav'
 aml_woodpecker_pecking_path = mda_dir + aml_dir + \
     aml_woodpecker_pecking + '.wav'  # don't overuse
-
 
 # long - needs edit
 aml_meadowlark_path = mda_dir + aml_dir + aml_meadowlark + '.wav'
