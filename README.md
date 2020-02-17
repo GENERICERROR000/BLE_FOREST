@@ -37,10 +37,6 @@ Funny one? http://soundbible.com/2039-Tree-Fall-Small.html
 
 - *Background*
 	- http://soundbible.com/1818-Rainforest-Ambience.html
-	- http://soundbible.com/1263-Nature-Ambiance.html
-	- http://soundbible.com/1214-Wetlands.html
-	- http://soundbible.com/1516-Waterfall.html
-	- http://soundbible.com/2032-Water.html
 - *Animals*
 	- http://soundbible.com/2033-Frogs.html#Frogs%20Sound
 	- http://soundbible.com/2180-Meadowlark.html

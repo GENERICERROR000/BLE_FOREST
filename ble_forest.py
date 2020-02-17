@@ -17,14 +17,11 @@ aml_dir = 'animal/'
 
 # background sounds
 bg_rainforest_ambiance = 'rainforest_ambiance'
-bg_nature_ambiance = 'nature_ambiance'
-bg_rain = 'rain'
-bg_waterfall = 'waterfall'
-bg_wetlands = 'wetlands'
 
 bg_gentle_rain = 'gentle_rain'
 bg_light_rain = 'light_rain'
 bg_thunder_lightning_rain = 'thunder_lightning_rain'
+
 
 # animal sounds
 aml_american_woodcock = 'american_woodcock'
@@ -59,35 +56,29 @@ pygame.init()
 pygame.mixer.set_num_channels(500)
 
 
-# YES
+# -----> Init Background Audio <-----
 
-
-# NO
-bg_nature_ambiance_path = mda_dir + bg_dir + bg_nature_ambiance + '.wav'
-bg_rain_path = mda_dir + bg_dir + bg_rain + '.wav'
-bg_waterfall_path = mda_dir + bg_dir + bg_waterfall + '.wav'
-
-
-# not reviewed yet
-bg_wetlands_path = mda_dir + bg_dir + bg_wetlands + '.wav'
-
+# has light thunder throughout
 bg_gentle_rain_path = mda_dir + bg_dir + bg_gentle_rain + '.wav'
+
+# better audio
+# more running water
+# short
 bg_light_rain_path = mda_dir + bg_dir + bg_light_rain + '.wav'
+
 bg_thunder_lightning_rain_path = mda_dir + \
     bg_dir + bg_thunder_lightning_rain + '.wav'
 
-pygame.mixer.music.load(bg_wetlands_path)
 
 # load bg sound
-# bg_path = mda_dir + bg_dir + bg_rainforest_ambiance + '.wav'
-# pygame.mixer.music.load(bg_path)
+bg_path = mda_dir + bg_dir + bg_rainforest_ambiance + '.wav'
+pygame.mixer.music.load(bg_path)
 
 # set init bg sound volume
 pygame.mixer.music.set_volume(bg_sound_volume)
 
 # init bg sound - loop forever
-# pygame.mixer.music.play(loops=-1)
-pygame.mixer.music.play()
+pygame.mixer.music.play(loops=-1)
 
 # -----> Data Handlers <-----
 
@@ -131,7 +122,7 @@ def play_sound(sound, sec, idx):
 # -----> Dev Helpers <-----
 
 
-### Rating for sounds ###
+### Rating For Effects ###
 
 # NOTE:
 # may want to randomize volume for every time
