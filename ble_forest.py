@@ -59,10 +59,16 @@ pygame.init()
 pygame.mixer.set_num_channels(500)
 
 
-# not reviewed yet
+# YES
+
+
+# NO
 bg_nature_ambiance_path = mda_dir + bg_dir + bg_nature_ambiance + '.wav'
 bg_rain_path = mda_dir + bg_dir + bg_rain + '.wav'
 bg_waterfall_path = mda_dir + bg_dir + bg_waterfall + '.wav'
+
+
+# not reviewed yet
 bg_wetlands_path = mda_dir + bg_dir + bg_wetlands + '.wav'
 
 bg_gentle_rain_path = mda_dir + bg_dir + bg_gentle_rain + '.wav'
@@ -70,16 +76,18 @@ bg_light_rain_path = mda_dir + bg_dir + bg_light_rain + '.wav'
 bg_thunder_lightning_rain_path = mda_dir + \
     bg_dir + bg_thunder_lightning_rain + '.wav'
 
+pygame.mixer.music.load(bg_wetlands_path)
 
 # load bg sound
-bg_path = mda_dir + bg_dir + bg_rainforest_ambiance + '.wav'
-pygame.mixer.music.load(bg_path)
+# bg_path = mda_dir + bg_dir + bg_rainforest_ambiance + '.wav'
+# pygame.mixer.music.load(bg_path)
 
 # set init bg sound volume
 pygame.mixer.music.set_volume(bg_sound_volume)
 
 # init bg sound - loop forever
-pygame.mixer.music.play(loops=-1)
+# pygame.mixer.music.play(loops=-1)
+pygame.mixer.music.play()
 
 # -----> Data Handlers <-----
 
@@ -167,12 +175,13 @@ TEST_ANIMAL_SOUND.set_volume(0.4)
 duration = TEST_ANIMAL_SOUND.get_length()
 
 # play sound randomly
-while True:
-    if random.randint(0, 1000000) == 10:
-		print(AAA, "duration:", duration)
-        pygame.mixer.find_channel(True).play(TEST_ANIMAL_SOUND)
-        # pygame.mixer.find_channel(True).play(TEST_ANIMAL_sound, maxtime=500)
+# while True:
+#     if random.randint(0, 1000000) == 10:
+#         print(AAA, "duration:", duration)
+#         pygame.mixer.find_channel(True).play(TEST_ANIMAL_SOUND)
+#         # pygame.mixer.find_channel(True).play(TEST_ANIMAL_sound, maxtime=500)
 
-        # pause for duration audio
-        # time.sleep(.5)
-        time.sleep(duration)
+#         # pause for duration audio
+#         time.sleep(duration)
+
+time.sleep(1000)
