@@ -4,12 +4,17 @@
 
 ### Code
 
+[apple_ble fork](https://github.com/nkernis/apple_bleee)
+
 - [ ] Pick Sounds
 - [ ] Background audio
 	- Intensity mapped to # of devices
 - [ ] Map events to unique sounds
 - [ ] Connect music to apple_ble data
-	- [def print_results():](https://github.com/hexway/apple_bleee/blob/master/ble_read_state.py#L591)
+	- Fn to get data from
+		- [def print_results():](https://github.com/nkernis/apple_bleee/blob/master/ble_read_state.py#L591)
+	- Fn to trigger cleaning data
+		- [def clear_zombies():](https://github.com/nkernis/apple_bleee/blob/master/ble_read_state.py#L577)
 
 ### Fabrication
 
@@ -24,6 +29,20 @@
 
 - https://www.pygame.org/docs/ref/music.html
 - https://github.com/hexway/apple_bleee
+	- https://hexway.io/research/apple-bleee/
+
+#### Setting Up RPI
+
+- How to instal
+	- https://github.com/nkernis/apple_bleee
+- If issue with `LC_ALL` and the rest
+	- https://raspberrypi.stackexchange.com/questions/43550/unable-to-reconfigure-locale-in-raspberry-pi
+- Install python3 on Raspian
+	- https://github.com/instabot-py/instabot.py/wiki/Installing-Python-3.7-on-Raspberry-Pi
+- Fix for Pillow (just requirements)
+	- https://github.com/python-pillow/Pillow/issues/3077#issuecomment-518978148
+- bs4
+	- https://stackoverflow.com/questions/11783875/importerror-no-module-named-bs4-beautifulsoup
 
 ### Fabrication
 

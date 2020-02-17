@@ -7,16 +7,6 @@ import pygame
 import random
 import time
 
-# -----> APPLE_BLE Data <-----
-
-currentState = {
-
-}
-
-deviceTypes = {
-
-}
-
 # -----> Media <-----
 
 # dirs
@@ -45,7 +35,36 @@ aml_eurasian_collared_dove_call = 'eurasian_collared_dove_call'
 aml_tawny_owl_call = 'tawny_owl_call'
 aml_woodpecker_pecking = 'woodpecker_pecking'
 
-# -----> Init Audio <-----
+### Rating For Effects ###
+
+aml_media_path = mda_dir + aml_dir
+
+# NOTE:
+# may want to randomize volume for every time
+# a sound is played. will "feel" more dynamic...?
+
+# good
+
+aml_killdeer_path = aml_media_path + aml_killdeer + '.wav'
+aml_frogs_path = aml_media_path + aml_frogs + '.wav'
+aml_american_woodcock_path = aml_media_path + aml_american_woodcock + '.wav'
+aml_peacock_path = aml_media_path + aml_peacock + '.wav'
+aml_crow_path = aml_media_path + aml_crow + '.wav'
+aml_eurasian_collared_dove_call_path = aml_media_path + \
+    aml_eurasian_collared_dove_call + '.wav'
+aml_woodpecker_pecking_path = aml_media_path + \
+    aml_woodpecker_pecking + '.wav'  # don't overuse
+
+# long - needs edit
+aml_meadowlark_path = aml_media_path + aml_meadowlark + '.wav'
+aml_warbling_vireo_path = aml_media_path + aml_warbling_vireo + '.wav'
+aml_quail_call_path = aml_media_path + aml_quail_call + '.wav'
+aml_crane_call_path = aml_media_path + aml_crane_call + '.wav'
+aml_tawny_owl_call_path = aml_media_path + aml_tawny_owl_call + '.wav'
+# potentially annoying...
+aml_cuckoo_bird_song_path = aml_media_path + aml_cuckoo_bird_song + '.wav'
+
+# -----> Init Pygame <-----
 
 
 bg_sound_volume = 0.5
@@ -58,23 +77,54 @@ pygame.init()
 # set number of channels (default: 8)
 pygame.mixer.set_num_channels(500)
 
+# -----> apple_ble Data <-----
+
+# NOTE: Use apple_ble vars to track changes (find them...)
+previous_data = []
+
+# data = [
+#     phone,
+#     phones[phone]['state'],
+#     phones[phone]['device'],
+#     phones[phone]['wifi'],
+#     phones[phone]['os'],
+#     phones[phone]['phone'],
+#     phones[phone]['time'],
+#     phones[phone]['notes']
+# ]
+
+# device_action_sound_map = {
+#     'phone': pygame.mixer.Sound(aml_frogs_path),
+#     'MacBook': pygame.mixer.Sound(aml_american_woodcock_path),
+#     'Watch': pygame.mixer.Sound(aml_killdeer_path),
+#     'airpods': pygame.mixer.Sound(aml_meadowlark_path),
+#     'Idle': pygame.mixer.Sound(aml_peacock_path),
+#     'Lock screen': pygame.mixer.Sound(aml_warbling_vireo_path),
+#     'Home screen': pygame.mixer.Sound(aml_quail_call_path),
+#     'Off': pygame.mixer.Sound(aml_crane_call_path),
+#     'Music': pygame.mixer.Sound(aml_crow_path),
+#     'Disabled': pygame.mixer.Sound(aml_cuckoo_bird_song_path),
+#     'Case:open': pygame.mixer.Sound(aml_eurasian_collared_dove_call_path),
+#     'Case:Closed': pygame.mixer.Sound(aml_tawny_owl_call_path),
+#     'Case:All out': pygame.mixer.Sound(aml_woodpecker_pecking_path),
+# }
 
 # -----> Init Background Audio <-----
 
+bg_media_dir = mda_dir + bg_dir
+
 # has light thunder throughout
-bg_gentle_rain_path = mda_dir + bg_dir + bg_gentle_rain + '.wav'
+bg_gentle_rain_path = bg_media_dir + bg_gentle_rain + '.wav'
 
 # better audio
 # more running water
 # short
-bg_light_rain_path = mda_dir + bg_dir + bg_light_rain + '.wav'
+bg_light_rain_path = bg_media_dir + bg_light_rain + '.wav'
 
-bg_thunder_lightning_rain_path = mda_dir + \
-    bg_dir + bg_thunder_lightning_rain + '.wav'
-
+bg_thunder_lightning_rain_path = bg_media_dir + bg_thunder_lightning_rain + '.wav'
 
 # load bg sound
-bg_path = mda_dir + bg_dir + bg_rainforest_ambiance + '.wav'
+bg_path = bg_media_dir + bg_rainforest_ambiance + '.wav'
 pygame.mixer.music.load(bg_path)
 
 # set init bg sound volume
@@ -90,7 +140,9 @@ pygame.mixer.music.play(loops=-1)
 def handle_new_data(data):
     print("new data", data)
 
-# NOTE: switch example
+# NOTE: switch examples
+
+# 1
 # def which_type(data):
 #     switch = {
 #         "os_a": "January",
@@ -100,6 +152,41 @@ def handle_new_data(data):
 #     	func = switch.get(data.type)
 #     	print(func, "invalid os")
 #     	return func
+
+# 2
+# def parse_os_wifi_code(code, dev):
+#     if code == '1c':
+#         if dev == 'MacBook':
+#             return ('Mac OS', 'On')
+#         else:
+#             return ('iOS12', 'On')
+#     elif code == '18':
+#         if dev == 'MacBook':
+#             return ('Mac OS', 'Off')
+#         else:
+#             return ('iOS12', 'Off')
+#     elif code == '10':
+#         return ('iOS11', '<unknown>')
+#     elif code == '1e':
+#         return ('iOS13', 'On')
+#     elif code == '1a':
+#         return ('iOS13', 'Off')
+#     elif code == '0e':
+#         return ('iOS13', 'Connecting')
+#     elif code == '0c':
+#         return ('iOS12', 'On')
+#     elif code == '04':
+#         return ('iOS13', 'On')
+#     elif code == '00':
+#         return ('iOS10', '<unknown>')
+#     elif code == '09':
+#         return ('Mac OS', '<unknown>')
+#     elif code == '14':
+#         return ('Mac OS', 'On')
+#     elif code == '98':
+#         return ('WatchOS', '<unknown>')
+#     else:
+#         return ('', '')
 
 # -----> Effect Handlers <-----
 
@@ -124,33 +211,6 @@ def play_sound(sound, sec, idx):
 
 
 # -----> Dev Helpers <-----
-
-
-### Rating For Effects ###
-
-# NOTE:
-# may want to randomize volume for every time
-# a sound is played. will "feel" more dynamic...?
-
-# good
-aml_killdeer_path = mda_dir + aml_dir + aml_killdeer + '.wav'
-aml_frogs_path = mda_dir + aml_dir + aml_frogs + '.wav'
-aml_american_woodcock_path = mda_dir + aml_dir + aml_american_woodcock + '.wav'
-aml_peacock_path = mda_dir + aml_dir + aml_peacock + '.wav'
-aml_crow_path = mda_dir + aml_dir + aml_crow + '.wav'
-aml_eurasian_collared_dove_call_path = mda_dir + \
-    aml_dir + aml_eurasian_collared_dove_call + '.wav'
-aml_woodpecker_pecking_path = mda_dir + aml_dir + \
-    aml_woodpecker_pecking + '.wav'  # don't overuse
-
-# long - needs edit
-aml_meadowlark_path = mda_dir + aml_dir + aml_meadowlark + '.wav'
-aml_warbling_vireo_path = mda_dir + aml_dir + aml_warbling_vireo + '.wav'
-aml_quail_call_path = mda_dir + aml_dir + aml_quail_call + '.wav'
-aml_crane_call_path = mda_dir + aml_dir + aml_crane_call + '.wav'
-aml_tawny_owl_call_path = mda_dir + aml_dir + aml_tawny_owl_call + '.wav'
-# potentially annoying...
-aml_cuckoo_bird_song_path = mda_dir + aml_dir + aml_cuckoo_bird_song + '.wav'
 
 CARL = [
     aml_killdeer_path,
