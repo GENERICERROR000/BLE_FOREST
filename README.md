@@ -43,6 +43,8 @@
 	- https://github.com/python-pillow/Pillow/issues/3077#issuecomment-518978148
 - bs4
 	- https://stackoverflow.com/questions/11783875/importerror-no-module-named-bs4-beautifulsoup
+- socket.AF_BLUETOOTH (WARN: must be done before compiling python3)
+	- https://stackoverflow.com/questions/29107537/missing-socket-af-bluetooth-in-anaconda-python
 
 ### Fabrication
 

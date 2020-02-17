@@ -133,7 +133,6 @@ pygame.mixer.music.set_volume(bg_sound_volume)
 # init bg sound - loop forever
 pygame.mixer.music.play(loops=-1)
 
-
 # -----> Data Handlers <-----
 
 
@@ -144,14 +143,13 @@ def handle_new_data(data):
 
 # 1
 # def which_type(data):
-#     switch = {
-#         "os_a": "January",
-#         "os_b": "February",
-#     }
-
-#     	func = switch.get(data.type)
-#     	print(func, "invalid os")
-#     	return func
+    # switch = {
+    #     "os_a": "January",
+    #     "os_b": "February",
+    # }
+    # func = switch.get(data.type)
+    # print(func, "invalid os")
+    # return func
 
 # 2
 # def parse_os_wifi_code(code, dev):
@@ -172,47 +170,27 @@ def handle_new_data(data):
 #     elif code == '1a':
 #         return ('iOS13', 'Off')
 #     elif code == '0e':
-#         return ('iOS13', 'Connecting')
-#     elif code == '0c':
-#         return ('iOS12', 'On')
-#     elif code == '04':
-#         return ('iOS13', 'On')
-#     elif code == '00':
-#         return ('iOS10', '<unknown>')
-#     elif code == '09':
-#         return ('Mac OS', '<unknown>')
-#     elif code == '14':
-#         return ('Mac OS', 'On')
-#     elif code == '98':
-#         return ('WatchOS', '<unknown>')
 #     else:
 #         return ('', '')
 
 # -----> Effect Handlers <-----
 
 
-def play_sound(sound, sec, idx):
-    pygame.mixer.Channel(idx).play(sound, -1, sec)
-    # load bg sound
-    # bg_path = mda_dir + bg_dir + bg_rainforest_ambiance + '.wav'
-    # bg_sound = pygame.mixer.Sound(bg_path)
+def play_sound(sound_name, volume=0.5):
+    to_play = device_action_sound_map[sound_name]
+    to_play.set_volume(bg_sound_volume)
 
     # find_channel(): find and return an inactive Channel.
     # if no inactive channels and the force argument is True,
     # will find the Channel with the longest running Sound and return it.
-
-    # set init bg sound volume
-    # bg_sound.set_volume(bg_sound_volume)
-
-    # init bg sound - loop forever
-    # pygame.mixer.find_channel(True).play(bg_sound, -1)
+    pygame.mixer.find_channel(True).play(to_play)
 
 # -----> State Handlers <----- (may not need)
 
 
 # -----> Dev Helpers <-----
 
-CARL = [
+SOUND_LIST = [
     aml_killdeer_path,
     aml_frogs_path,
     aml_american_woodcock_path,
@@ -233,7 +211,7 @@ parth = ''
 # play sound randomly
 while True:
     if random.randint(0, 1000000) == 10:
-        parth = CARL[random.randint(0, 12)]
+        parth = SOUND_LIST[random.randint(0, 12)]
 
         test_animal_sound = pygame.mixer.Sound(parth)
         test_animal_sound.set_volume(0.4)
@@ -245,6 +223,6 @@ while True:
         # pygame.mixer.find_channel(True).play(TEST_ANIMAL_sound, maxtime=500)
 
         # pause for duration audio
-        time.sleep(3)
+        time.sleep(2)
 
 # time.sleep(2000)
