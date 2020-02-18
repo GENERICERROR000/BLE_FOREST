@@ -82,6 +82,10 @@ pygame.mixer.set_num_channels(500)
 # NOTE: Use apple_ble vars to track changes (find them...)
 previous_data = []
 
+#  NOTE: apple_ble uses area for printing, have it just pass
+#        object and can run comparision here --or--
+#        use their zombie fn to remove items from state
+
 # data = [
 #     phone,
 #     phones[phone]['state'],
@@ -92,6 +96,12 @@ previous_data = []
 #     phones[phone]['time'],
 #     phones[phone]['notes']
 # ]
+
+# sock = 0
+# titles = ['Mac', 'State', 'Device', 'WI-FI', 'OS', 'Phone', 'Time', 'Notes']
+# dev_sig = {'02010': 'MacBook', '02011': 'iPhone'}
+# dev_types = ["iPad", "iPhone", "MacOS", "AirPods",
+#              "Powerbeats3", "BeatsX", "Beats Solo3"]
 
 # device_action_sound_map = {
 #     'phone': pygame.mixer.Sound(aml_frogs_path),
@@ -110,6 +120,7 @@ previous_data = []
 # }
 
 # -----> Init Background Audio <-----
+
 
 bg_media_dir = mda_dir + bg_dir
 
@@ -135,6 +146,19 @@ pygame.mixer.music.play(loops=-1)
 
 # -----> Data Handlers <-----
 
+
+# TODO: How to handle apple_ble data
+# - 1) `print_results()` is called(apple_ble)
+#     - 1.1) `clear_zombies()` is called(apple_ble)
+#     - 1.1.1) call custom fn to remove dev from custom audio state
+#   		- 1.1.2) decrease number of dev's
+#    	- 1.2) custom data handler called
+# - 2) custom data handler
+#    	- 2.1) receive data and compare to state
+#   		- 2.1.1) keep if in state
+#    	- 2.2) those not in state are new
+#   		- 2.2.1) increase number of dev's
+#   		- 2.2.2) play sound(use fn to determine type) for each new dev
 
 def handle_new_data(data):
     print("new data", data)

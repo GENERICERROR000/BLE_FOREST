@@ -1,0 +1,116 @@
+['MAC', 'STATE', 'DEVICE', 'WIFI', 'OS', 'PHONE', TIME, 'NOTES']
+['5,
+{D2:90:B6:5B:3A', 'Home screen', 'iPhone', 'On', 'iOS12', '', 1581978559, '']
+['6B:EA:65:D8:89:B9', 'Idle', 'iPhone', 'On', 'iOS12', '', 1581978559, '']
+['41:36:9D:8D:FA:54', 'Lock screen', 'iPhone', 'On', 'iOS13', '', 1581978559, '']
+['90:DD:5D:9F:12:CB', 'Disabled', 'iPhone', '<unknown>', 'iOS11', '', 1581978559, '']
+['C8:69:CD:0E:13:E4', 'Disabled', 'iPhone', 'On', 'iOS13', '', 1581978559, '']
+['40:B8:8F:7A:00:B7', 'Disabled', 'Watch', '<unknown>', 'WatchOS', '', 1581978559, '']
+['5A:7B:FE:52:E9:BC', 'Idle', 'iPhone', 'On', 'iOS12', '', 1581978557, '']
+['74:47:3F:17:EB:E5', '<unknown>', 'iPhone', 'On', 'iOS12', '', 1581978558, '']
+['50:32:37:8E:41:74', 'Disabled', 'iPhone', 'On', 'Mac OS', '', 1581978558, '']
+['78:3D:97:FE:5B:70', '<unknown>', 'iPhone', '<unknown>', '<unknown>', '', 1581978547, '']
+['4B:E9:DB:FD:93:5E', '<unknown>', 'iPhone', '<unknown>', '<unknown>', '', 1581978552, '']
+['AC:BC:32:72:8E:9F', 'Disabled', 'iPhone', 'On', 'iOS13', '', 1581978559, '']
+['5E:D2:90:B6:5B:3A', 'Home screen', 'iPhone', 'On', 'iOS12', '', 1581978559, '']
+['6B:EA:65:D8:89:B9', 'Idle', 'iPhone', 'On', 'iOS12', '', 1581978559, '']
+['41:36:9D:8D:FA:54', 'Lock screen', 'iPhone', 'On', 'iOS13', '', 1581978559, '']
+['90:DD:5D:9F:12:CB', 'Disabled', 'iPhone', '<unknown>', 'iOS11', '', 1581978559, '']
+['C8:69:CD:0E:13:E4', 'Disabled', 'iPhone', 'On', 'iOS13', '', 1581978559, '']
+['40:B8:8F:7A:00:B7', 'Disabled', 'Watch', '<unknown>', 'WatchOS', '', 1581978559, '']
+['5A:7B:FE:52:E9:BC', 'Idle', 'iPhone', 'On', 'iOS12', '', 1581978557, '']
+['74:47:3F:17:EB:E5', '<unknown>', 'iPhone', 'On', 'iOS12', '', 1581978559, '']
+['50:32:37:8E:41:74', 'Disabled', 'iPhone', 'On', 'Mac OS', '', 1581978559, '']
+['78:3D:97:FE:5B:70', '<unknown>', 'iPhone', '<unknown>', '<unknown>', '', 1581978547, '']
+['4B:E9:DB:FD:93:5E', '<unknown>', 'iPhone', '<unknown>', '<unknown>', '', 1581978552, '']
+['AC:BC:32:72:8E:9F', 'Disabled', 'iPhone', 'On', 'iOS13', '', 1581978560, '']
+['5E:D2:90:B6:5B:3A', 'Home screen', 'iPhone', 'On', 'iOS12', '', 1581978560, '']
+['6B:EA:65:D8:89:B9', 'Idle', 'iPhone', 'On', 'iOS12', '', 1581978559, '']
+['41:36:9D:8D:FA:54', 'Lock screen', 'iPhone', 'On', 'iOS13', '', 1581978560, '']
+['90:DD:5D:9F:12:CB', 'Disabled', 'iPhone', '<unknown>', 'iOS11', '', 1581978560, '']
+['C8:69:CD:0E:13:E4', 'Disabled', 'iPhone', 'On', 'iOS13', '', 1581978560, '']
+['40:B8:8F:7A:00:B7', 'Disabled', 'Watch', '<unknown>', 'WatchOS', '', 1581978560, '']
+['5A:7B:FE:52:E9:BC', 'Idle', 'iPhone', 'On', 'iOS12', '', 1581978560, '']
+['74:47:3F:17:EB:E5', '<unknown>', 'iPhone', 'On', 'iOS12', '', 1581978560, '']
+['50:32:37:8E:41:74', 'Disabled', 'iPhone', 'On', 'Mac OS', '', 1581978560, '']
+['78:3D:97:FE:5B:70', '<unknown>', 'iPhone', '<unknown>', '<unknown>', '', 1581978547, '']
+['4B:E9:DB:FD:93:5E', '<unknown>', 'iPhone', '<unknown>', '<unknown>', '', 1581978552, '']
+['AC:BC:32:72:8E:9F', 'Disabled', 'iPhone', 'On', 'iOS13', '', 1581978560, '']
+['5E:D2:90:B6:5B:3A', 'Home screen', 'iPhone', 'On', 'iOS12', '', 1581978560, '']
+['6B:EA:65:D8:89:B9', 'Idle', 'iPhone', 'On', 'iOS12', '', 1581978560, '']
+['41:36:9D:8D:FA:54', 'Lock screen', 'iPhone', 'On', 'iOS13', '', 1581978560, '']
+['90:DD:5D:9F:12:CB', 'Disabled', 'iPhone', '<unknown>', 'iOS11', '', 1581978560, '']
+['C8:69:CD:0E:13:E4', 'Disabled', 'iPhone', 'On', 'iOS13', '', 1581978560, '']
+['40:B8:8F:7A:00:B7', 'Disabled', 'Watch', '<unknown>', 'WatchOS', '', 1581978560, '']
+['5A:7B:FE:52:E9:BC', 'Idle', 'iPhone', 'On', 'iOS12', '', 1581978560, '']
+['74:47:3F:17:EB:E5', '<unknown>', 'iPhone', 'On', 'iOS12', '', 1581978560, '']
+['50:32:37:8E:41:74', 'Disabled', 'iPhone', 'On', 'Mac OS', '', 1581978560, '']
+['78:3D:97:FE:5B:70', '<unknown>', 'iPhone', '<unknown>', '<unknown>', '', 1581978547, '']
+['4B:E9:DB:FD:93:5E', '<unknown>', 'iPhone', '<unknown>', '<unknown>', '', 1581978552, '']
+
+{'C8:69:CD:0E:13:E4': {'state': 'Disabled', 'device': 'iPhone', 'wifi': 'On', 'os': 'iOS13', 'phone': '', 'time': 1581980103, 'notes': ''},
+{'6F:3B:58:A3:30:D1': {'state': 'Disabled', 'device': 'MacBook', 'wifi': 'Off', 'os': 'Mac OS', 'phone': '', 'time': 1581980103, 'notes': ''},
+{'90:DD:5D:9F:12:CB': {'state': 'Disabled', 'device': 'iPhone', 'wifi': '<unknown>', 'os': 'iOS11', 'phone': '', 'time': 1581980103, 'notes': ''},
+{'42:86:50:35:9F:10': {'state': 'Off', 'device': 'iPhone', 'wifi': 'On', 'os': 'iOS13', 'phone': '', 'time': 1581980103, 'notes': ''},
+{'4F:FD:8D:9D:91:85': {'state': 'Disabled', 'device': 'iPhone', 'wifi': 'On', 'os': 'iOS12', 'phone': '', 'time': 1581980103, 'notes': ''},
+{'5A:7B:FE:52:E9:BC': {'state': 'Idle', 'device': 'iPhone', 'wifi': 'On', 'os': 'iOS12', 'phone': '', 'time': 1581980103, 'notes': ''},
+{'40:B8:8F:7A:00:B7': {'state': 'Disabled', 'device': 'Watch', 'wifi': '<unknown>', 'os': 'WatchOS', 'phone': '', 'time': 1581980102, 'notes': ''},
+{'AC:BC:32:72:8E:9F': {'state': 'Disabled', 'device': 'iPhone', 'wifi': 'On', 'os': 'iOS13', 'phone': '', 'time': 1581980103, 'notes': ''},
+{'5F:9D:B5:25:65:94': {'state': 'Off', 'device': 'iPhone', 'wifi': 'On', 'os': 'iOS12', 'phone': '', 'time': 1581980103, 'notes': ''},
+{'6B:EA:65:D8:89:B9': {'state': 'Idle', 'device': 'iPhone', 'wifi': 'On', 'os': 'iOS12', 'phone': '', 'time': 1581980103, 'notes': ''},
+
+{{'C8:69:CD:0E:13:E4': {'state': 'Disabled', 'device': 'iPhone', 'wifi': 'On', 'os': 'iOS13', 'phone': '', 'time': 1581980104, 'notes': ''},
+{'6F:3B:58:A3:30:D1': {'state': 'Disabled', 'device': 'MacBook', 'wifi': 'Off', 'os': 'Mac OS', 'phone': '', 'time': 1581980104, 'notes': ''},
+{'90:DD:5D:9F:12:CB': {'state': 'Disabled', 'device': 'iPhone', 'wifi': '<unknown>', 'os': 'iOS11', 'phone': '', 'time': 1581980104, 'notes': ''},
+{'42:86:50:35:9F:10': {'state': 'Off', 'device': 'iPhone', 'wifi': 'On', 'os': 'iOS13', 'phone': '', 'time': 1581980104, 'notes': ''},
+{'4F:FD:8D:9D:91:85': {'state': 'Disabled', 'device': 'iPhone', 'wifi': 'On', 'os': 'iOS12', 'phone': '', 'time': 1581980104, 'notes': ''},
+{'5A:7B:FE:52:E9:BC': {'state': 'Idle', 'device': 'iPhone', 'wifi': 'On', 'os': 'iOS12', 'phone': '', 'time': 1581980103, 'notes': ''},
+{'40:B8:8F:7A:00:B7': {'state': 'Disabled', 'device': 'Watch', 'wifi': '<unknown>', 'os': 'WatchOS', 'phone': '', 'time': 1581980102, 'notes': ''},
+{'AC:BC:32:72:8E:9F': {'state': 'Disabled', 'device': 'iPhone', 'wifi': 'On', 'os': 'iOS13', 'phone': '', 'time': 1581980104, 'notes': ''},
+{'5F:9D:B5:25:65:94': {'state': 'Off', 'device': 'iPhone', 'wifi': 'On', 'os': 'iOS12', 'phone': '', 'time': 1581980103, 'notes': ''},
+{'6B:EA:65:D8:89:B9': {'state': 'Idle', 'device': 'iPhone', 'wifi': 'On', 'os': 'iOS12', 'phone': '', 'time': 1581980103, 'notes': ''},
+{'50:32:37:8E:41:74': {'state': '<unknown>', 'device': 'iPhone', 'wifi': '<unknown>', 'os': '<unknown>', 'phone': '', 'time': 1581980103, 'notes': ''},
+{{'C8:69:CD:0E:13:E4': {'state': 'Disabled', 'device': 'iPhone', 'wifi': 'On', 'os': 'iOS13', 'phone': '', 'time': 1581980104, 'notes': ''},
+{'6F:3B:58:A3:30:D1': {'state': 'Disabled', 'device': 'MacBook', 'wifi': 'Off', 'os': 'Mac OS', 'phone': '', 'time': 1581980104, 'notes': ''},
+{'90:DD:5D:9F:12:CB': {'state': 'Disabled', 'device': 'iPhone', 'wifi': '<unknown>', 'os': 'iOS11', 'phone': '', 'time': 1581980104, 'notes': ''},
+{'42:86:50:35:9F:10': {'state': 'Off', 'device': 'iPhone', 'wifi': 'On', 'os': 'iOS13', 'phone': '', 'time': 1581980104, 'notes': ''},
+{'4F:FD:8D:9D:91:85': {'state': 'Disabled', 'device': 'iPhone', 'wifi': 'On', 'os': 'iOS12', 'phone': '', 'time': 1581980104, 'notes': ''},
+{'5A:7B:FE:52:E9:BC': {'state': 'Idle', 'device': 'iPhone', 'wifi': 'On', 'os': 'iOS12', 'phone': '', 'time': 1581980105, 'notes': ''},
+{'40:B8:8F:7A:00:B7': {'state': 'Disabled', 'device': 'Watch', 'wifi': '<unknown>', 'os': 'WatchOS', 'phone': '', 'time': 1581980104, 'notes': ''},
+{'AC:BC:32:72:8E:9F': {'state': 'Disabled', 'device': 'iPhone', 'wifi': 'On', 'os': 'iOS13', 'phone': '', 'time': 1581980104, 'notes': ''},
+{'5F:9D:B5:25:65:94': {'state': 'Off', 'device': 'iPhone', 'wifi': 'On', 'os': 'iOS12', 'phone': '', 'time': 1581980103, 'notes': ''},
+{'6B:EA:65:D8:89:B9': {'state': 'Idle', 'device': 'iPhone', 'wifi': 'On', 'os': 'iOS12', 'phone': '', 'time': 1581980104, 'notes': ''},
+{'50:32:37:8E:41:74': {'state': '<unknown>', 'device': 'iPhone', 'wifi': '<unknown>', 'os': '<unknown>', 'phone': '', 'time': 1581980103, 'notes': ''},
+{{'C8:69:CD:0E:13:E4': {'state': 'Disabled', 'device': 'iPhone', 'wifi': 'On', 'os': 'iOS13', 'phone': '', 'time': 1581980105, 'notes': ''},
+{'6F:3B:58:A3:30:D1': {'state': 'Disabled', 'device': 'MacBook', 'wifi': 'Off', 'os': 'Mac OS', 'phone': '', 'time': 1581980105, 'notes': ''},
+{'90:DD:5D:9F:12:CB': {'state': 'Disabled', 'device': 'iPhone', 'wifi': '<unknown>', 'os': 'iOS11', 'phone': '', 'time': 1581980105, 'notes': ''},
+{'42:86:50:35:9F:10': {'state': 'Off', 'device': 'iPhone', 'wifi': 'On', 'os': 'iOS13', 'phone': '', 'time': 1581980105, 'notes': ''},
+{'4F:FD:8D:9D:91:85': {'state': 'Disabled', 'device': 'iPhone', 'wifi': 'On', 'os': 'iOS12', 'phone': '', 'time': 1581980104, 'notes': ''},
+{'5A:7B:FE:52:E9:BC': {'state': 'Idle', 'device': 'iPhone', 'wifi': 'On', 'os': 'iOS12', 'phone': '', 'time': 1581980105, 'notes': ''},
+{'40:B8:8F:7A:00:B7': {'state': 'Disabled', 'device': 'Watch', 'wifi': '<unknown>', 'os': 'WatchOS', 'phone': '', 'time': 1581980105, 'notes': ''},
+{'AC:BC:32:72:8E:9F': {'state': 'Disabled', 'device': 'iPhone', 'wifi': 'On', 'os': 'iOS13', 'phone': '', 'time': 1581980105, 'notes': ''},
+{'5F:9D:B5:25:65:94': {'state': 'Off', 'device': 'iPhone', 'wifi': 'On', 'os': 'iOS12', 'phone': '', 'time': 1581980105, 'notes': ''},
+{'6B:EA:65:D8:89:B9': {'state': 'Idle', 'device': 'iPhone', 'wifi': 'On', 'os': 'iOS12', 'phone': '', 'time': 1581980105, 'notes': ''},
+{'50:32:37:8E:41:74': {'state': '<unknown>', 'device': 'iPhone', 'wifi': '<unknown>', 'os': '<unknown>', 'phone': '', 'time': 1581980103, 'notes': ''},
+{{'C8:69:CD:0E:13:E4': {'state': 'Disabled', 'device': 'iPhone', 'wifi': 'On', 'os': 'iOS13', 'phone': '', 'time': 1581980105, 'notes': ''},
+{'6F:3B:58:A3:30:D1': {'state': 'Disabled', 'device': 'MacBook', 'wifi': 'Off', 'os': 'Mac OS', 'phone': '', 'time': 1581980105, 'notes': ''},
+{'90:DD:5D:9F:12:CB': {'state': 'Disabled', 'device': 'iPhone', 'wifi': '<unknown>', 'os': 'iOS11', 'phone': '', 'time': 1581980105, 'notes': ''},
+{'42:86:50:35:9F:10': {'state': 'Off', 'device': 'iPhone', 'wifi': 'On', 'os': 'iOS13', 'phone': '', 'time': 1581980106, 'notes': ''},
+{'4F:FD:8D:9D:91:85': {'state': 'Disabled', 'device': 'iPhone', 'wifi': 'On', 'os': 'iOS12', 'phone': '', 'time': 1581980104, 'notes': ''},
+{'5A:7B:FE:52:E9:BC': {'state': 'Idle', 'device': 'iPhone', 'wifi': 'On', 'os': 'iOS12', 'phone': '', 'time': 1581980105, 'notes': ''},
+{'40:B8:8F:7A:00:B7': {'state': 'Disabled', 'device': 'Watch', 'wifi': '<unknown>', 'os': 'WatchOS', 'phone': '', 'time': 1581980105, 'notes': ''},
+{'AC:BC:32:72:8E:9F': {'state': 'Disabled', 'device': 'iPhone', 'wifi': 'On', 'os': 'iOS13', 'phone': '', 'time': 1581980106, 'notes': ''},
+{'5F:9D:B5:25:65:94': {'state': 'Off', 'device': 'iPhone', 'wifi': 'On', 'os': 'iOS12', 'phone': '', 'time': 1581980106, 'notes': ''},
+{'6B:EA:65:D8:89:B9': {'state': 'Idle', 'device': 'iPhone', 'wifi': 'On', 'os': 'iOS12', 'phone': '', 'time': 1581980105, 'notes': ''},
+{'50:32:37:8E:41:74': {'state': '<unknown>', 'device': 'iPhone', 'wifi': '<unknown>', 'os': '<unknown>', 'phone': '', 'time': 1581980103, 'notes': ''},
+{{'C8:69:CD:0E:13:E4': {'state': 'Disabled', 'device': 'iPhone', 'wifi': 'On', 'os': 'iOS13', 'phone': '', 'time': 1581980106, 'notes': ''},
+{'6F:3B:58:A3:30:D1': {'state': 'Disabled', 'device': 'MacBook', 'wifi': 'Off', 'os': 'Mac OS', 'phone': '', 'time': 1581980106, 'notes': ''},
+{'90:DD:5D:9F:12:CB': {'state': 'Disabled', 'device': 'iPhone', 'wifi': '<unknown>', 'os': 'iOS11', 'phone': '', 'time': 1581980105, 'notes': ''},
+{'42:86:50:35:9F:10': {'state': 'Off', 'device': 'iPhone', 'wifi': 'On', 'os': 'iOS13', 'phone': '', 'time': 1581980106, 'notes': ''},
+{'4F:FD:8D:9D:91:85': {'state': 'Disabled', 'device': 'iPhone', 'wifi': 'On', 'os': 'iOS12', 'phone': '', 'time': 1581980104, 'notes': ''},
+{'5A:7B:FE:52:E9:BC': {'state': 'Idle', 'device': 'iPhone', 'wifi': 'On', 'os': 'iOS12', 'phone': '', 'time': 1581980106, 'notes': ''},
+{'40:B8:8F:7A:00:B7': {'state': 'Disabled', 'device': 'Watch', 'wifi': '<unknown>', 'os': 'WatchOS', 'phone': '', 'time': 1581980106, 'notes': ''},
+{'AC:BC:32:72:8E:9F': {'state': 'Disabled', 'device': 'iPhone', 'wifi': 'On', 'os': 'iOS13', 'phone': '', 'time': 1581980106, 'notes': ''},
+{'5F:9D:B5:25:65:94': {'state': 'Off', 'device': 'iPhone', 'wifi': 'On', 'os': 'iOS12', 'phone': '', 'time': 1581980106, 'notes': ''},
+{'6B:EA:65:D8:89:B9': {'state': 'Idle', 'device': 'iPhone', 'wifi': 'On', 'os': 'iOS12', 'phone': '', 'time': 1581980105, 'notes': ''},
+{'50:32:37:8E:41:74': {'state': '<unknown>', 'device': 'iPhone', 'wifi': '<unknown>', 'os': '<unknown>', 'phone': '', 'time': 1581980103, 'notes': ''},
