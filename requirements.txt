@@ -1,1 +1,16 @@
+# apple_ble
+
+bs4
+fleep
+Pillow
+pybluez
+requests
+pycrypto
+netifaces
+prettytable
+libarchive-c
+ctypescrypto
+
+# ble_forest
+
 pygame

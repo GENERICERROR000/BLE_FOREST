@@ -90,7 +90,7 @@ device_status_sound_map = {
     'default': pygame.mixer.Sound(aml_crow_path)
 }
 
-# -----> apple_ble Data <-----
+# -----> apple_bleee Data <-----
 
 state = {}
 
@@ -167,9 +167,9 @@ def handle_device_status_change(dev, dev_data):
     play_sound(sound)
 
 
-# def remove_from_state(data):
-#     print('new data')
-#     set_bg_volume()
+def remove_from_state(dev):
+    print('remiving device')
+    del state[dev]
 
 
 # -----> Sound Handlers <-----
