@@ -603,6 +603,7 @@ def clear_zombies():
         if cur_time - phones[k]['time'] > args.ttl:
             del phones[k]
             remove_from_state(k)
+
             if resolved_macs.count(k):
                 resolved_macs.remove(k)
             if resolved_devs.count(k):

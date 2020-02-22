@@ -42,13 +42,17 @@ All code for ble sniffing and utils comes from [apple_bleee - hexway ](https://g
 - If issue with `LC_ALL` and the rest
 	- https://raspberrypi.stackexchange.com/questions/43550/unable-to-reconfigure-locale-in-raspberry-pi
 - Install python3 on Raspian
-	- https://github.com/instabot-py/instabot.py/wiki/Installing-Python-3.7-on-Raspberry-Pi
+	- `sudo apt install python3 -y`
+	- If need to remove manual installation
+		- `apt-get autoremove python3`
 - Fix for Pillow (just requirements)
 	- https://github.com/python-pillow/Pillow/issues/3077#issuecomment-518978148
 - bs4
 	- https://stackoverflow.com/questions/11783875/importerror-no-module-named-bs4-beautifulsoup
 - socket.AF_BLUETOOTH (WARN: must be done before compiling python3)
 	- https://stackoverflow.com/questions/29107537/missing-socket-af-bluetooth-in-anaconda-python
+- can't install pygame
+	- https://forum.ubiquityrobotics.com/t/im-trying-to-install-some-software-packages-but-i-keep-getting-errors/363/3
 
 ### Fabrication
 

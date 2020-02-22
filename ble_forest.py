@@ -244,39 +244,39 @@ def play_sound(sound, volume=0.5):
 # -----> Dev Helpers <-----
 
 
-SOUND_LIST = [
-    aml_killdeer_path,
-    aml_frogs_path,
-    aml_american_woodcock_path,
-    aml_peacock_path,
-    aml_crow_path,
-    aml_eurasian_collared_dove_call_path,
-    aml_woodpecker_pecking_path,
-    aml_meadowlark_path,
-    aml_warbling_vireo_path,
-    aml_quail_call_path,
-    aml_crane_call_path,
-    aml_tawny_owl_call_path,
-    aml_cuckoo_bird_song_path,
-]
-duration = 0
-parth = ''
+# SOUND_LIST = [
+#     aml_killdeer_path,
+#     aml_frogs_path,
+#     aml_american_woodcock_path,
+#     aml_peacock_path,
+#     aml_crow_path,
+#     aml_eurasian_collared_dove_call_path,
+#     aml_woodpecker_pecking_path,
+#     aml_meadowlark_path,
+#     aml_warbling_vireo_path,
+#     aml_quail_call_path,
+#     aml_crane_call_path,
+#     aml_tawny_owl_call_path,
+#     aml_cuckoo_bird_song_path,
+# ]
+# duration = 0
+# parth = ''
 
-# play sound randomly
-while True:
-    if random.randint(0, 1000000) == 10:
-        parth = SOUND_LIST[random.randint(0, 12)]
+# # play sound randomly
+# while True:
+#     if random.randint(0, 1000000) == 10:
+#         parth = SOUND_LIST[random.randint(0, 12)]
 
-        test_animal_sound = pygame.mixer.Sound(parth)
-        test_animal_sound.set_volume(0.4)
+#         test_animal_sound = pygame.mixer.Sound(parth)
+#         test_animal_sound.set_volume(0.4)
 
-        duration = test_animal_sound.get_length()
+#         duration = test_animal_sound.get_length()
 
-        print(parth, 'duration:', duration)
-        pygame.mixer.find_channel(True).play(test_animal_sound)
-        # pygame.mixer.find_channel(True).play(TEST_ANIMAL_sound, maxtime=500)
+#         print(parth, 'duration:', duration)
+#         pygame.mixer.find_channel(True).play(test_animal_sound)
+#         # pygame.mixer.find_channel(True).play(TEST_ANIMAL_sound, maxtime=500)
 
-        # pause for duration audio
-        time.sleep(2)
+#         # pause for duration audio
+#         time.sleep(2)
 
 # time.sleep(2000)
