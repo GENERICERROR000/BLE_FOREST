@@ -66,9 +66,6 @@ aml_cuckoo_bird_song_path = aml_media_path + aml_cuckoo_bird_song + '.wav'
 
 # -----> Init Pygame <-----
 
-
-bg_sound_volume = 0.5
-
 # init pygame
 pygame.mixer.pre_init()
 pygame.mixer.init()
@@ -77,15 +74,28 @@ pygame.init()
 # set number of channels (default: 8)
 pygame.mixer.set_num_channels(500)
 
+device_status_sound_map = {
+    'idle':  pygame.mixer.Sound(aml_woodpecker_pecking_path),
+    'lock_screen': pygame.mixer.Sound(aml_american_woodcock_path),
+    'home_screen': pygame.mixer.Sound(aml_killdeer_path),
+    'off': pygame.mixer.Sound(aml_meadowlark_path),
+    'case_close': pygame.mixer.Sound(aml_peacock_path),
+    'case_open': pygame.mixer.Sound(aml_warbling_vireo_path),
+    'iphone': pygame.mixer.Sound(aml_quail_call_path),
+    'airpods_action': pygame.mixer.Sound(aml_crane_call_path),
+    'ipad': pygame.mixer.Sound(aml_cuckoo_bird_song_path),
+    'macos': pygame.mixer.Sound(aml_eurasian_collared_dove_call_path),
+    'airpods': pygame.mixer.Sound(aml_tawny_owl_call_path),
+    'beats': pygame.mixer.Sound(aml_frogs_path),
+    'default': pygame.mixer.Sound(aml_crow_path)
+}
 
 # -----> apple_ble Data <-----
 
-
 state = {}
 
-number_devices = 0
-
-# carl = {
+# NOTE: state structure example
+# state = {
 #     'C8:69:CD:0E:13:E4': {
 #         'state': 'Disabled',
 #         'device': 'iPhone',
@@ -97,22 +107,6 @@ number_devices = 0
 #     },
 #     "...": {}
 # }
-
-device_action_sound_map = {
-    'phone': pygame.mixer.Sound(aml_frogs_path),
-    'MacBook': pygame.mixer.Sound(aml_american_woodcock_path),
-    'Watch': pygame.mixer.Sound(aml_killdeer_path),
-    'airpods': pygame.mixer.Sound(aml_meadowlark_path),
-    'Idle': pygame.mixer.Sound(aml_peacock_path),
-    'Lock screen': pygame.mixer.Sound(aml_warbling_vireo_path),
-    'Home screen': pygame.mixer.Sound(aml_quail_call_path),
-    'Off': pygame.mixer.Sound(aml_crane_call_path),
-    'Music': pygame.mixer.Sound(aml_crow_path),
-    'Disabled': pygame.mixer.Sound(aml_cuckoo_bird_song_path),
-    'Case:open': pygame.mixer.Sound(aml_eurasian_collared_dove_call_path),
-    'Case:Closed': pygame.mixer.Sound(aml_tawny_owl_call_path),
-    'Case:All out': pygame.mixer.Sound(aml_woodpecker_pecking_path),
-}
 
 
 # -----> Init Background Audio <-----
@@ -135,27 +129,13 @@ bg_path = bg_media_dir + bg_rainforest_ambiance + '.wav'
 pygame.mixer.music.load(bg_path)
 
 # set init bg sound volume
-pygame.mixer.music.set_volume(bg_sound_volume)
+pygame.mixer.music.set_volume(0.5)
 
 # init bg sound - loop forever
 pygame.mixer.music.play(loops=-1)
 
 
 # -----> Data Handlers <-----
-
-
-# TODO: How to handle apple_ble data
-# - 1.0) `print_results()` is called (apple_ble)
-#     - 1.1) `clear_zombies()` is called (apple_ble)
-#       - 1.1.1) call custom fn to remove dev from custom audio state
-#   	- 1.1.2) decrease number of dev's
-#    - 1.2) custom data handler called (see 2.0)
-# - 2.0) custom data handler
-#    - 2.1) receive data and compare to state
-#   	- 2.1.1) keep if in state
-#    - 2.2) those not in state are new
-#   	- 2.2.1) increase number of dev's
-#   	- 2.2.2) play sound(use fn to determine type) for each new dev
 
 def handle_new_data(data):
     print('new data')
@@ -173,76 +153,80 @@ def update_state(devices):
             handle_new_device(dev, dev_data)
 
 
-def handle_device_status_change(dev, dev_data):
-    print('device status has changed')
-    sound = which_sound(dev_data['device'], dev_data['state'])
-    play_sound(sound)
-
-
 def handle_new_device(dev, dev_data):
     print('new device')
     state[dev] = dev_data
+    sound = which_sound_device(dev_data['device'])
+    play_sound(sound)
+    set_bg_volume()
 
-    # - increment number of devices
-    # - play audio for device type
-    # -
 
-    # carl = {
-    #     'C8:69:CD:0E:13:E4': {
-    #         'state': 'Disabled',
-    #         'device': 'iPhone',
-    #         'wifi': 'On',
-    #         'os': 'iOS13',
-    #         'phone': '',
-    #         'time': 1581980104,
-    #         'notes': ''
-    #     },
-    #     "...": {}
-    # }
+def handle_device_status_change(dev, dev_data):
+    print('device status has changed')
+    sound = which_sound_state(dev_data['device'], dev_data['state'])
+    play_sound(sound)
+
+
+# def remove_from_state(data):
+#     print('new data')
+#     set_bg_volume()
 
 
 # -----> Sound Handlers <-----
 
-def which_sound(device, state):
-    # WARN: RETURN THIS: `to_play = device_action_sound_map[sound_name]`
+def set_bg_volume():
+    num_devices = len(state)
 
+    if num_devices <= 15:
+        pygame.mixer.music.set_volume(0.2)
+    elif num_devices > 15 and num_devices <= 30:
+        pygame.mixer.music.set_volume(0.4)
+    elif num_devices > 20 and num_devices <= 45:
+        pygame.mixer.music.set_volume(0.6)
+    elif num_devices > 45:
+        pygame.mixer.music.set_volume(0.8)
+    else:
+        pygame.mixer.music.set_volume(0.2)
+
+
+def which_sound_device(device):
+    if device == 'iPad':
+        return device_status_sound_map['ipad']
+    elif device == 'iPhone':
+        return device_status_sound_map['iphone']
+    elif device == 'MacOS':
+        return device_status_sound_map['macos']
+    elif device == 'AirPods':
+        return device_status_sound_map['airpods']
+    elif device == 'Powerbeats3' or 'BeatsX' or 'Beats Solo3':
+        return device_status_sound_map['beats']
+    else:
+        return device_status_sound_map['default']
+
+
+def which_sound_state(device, state):
     if device == 'iPad' or 'iPhone' or 'MacOS':
         if state == 'Idle':
-            return ''
-
+            return device_status_sound_map['idle']
         elif state == 'Lock screen':
-            return ''
-
+            return device_status_sound_map['lock_screen']
         elif state == 'Home screen':
-            return ''
-
+            return device_status_sound_map['home_screen']
         elif state == 'Off':
-            return ''
-
+            return device_status_sound_map['off']
         else:
-            return 'default_action'
-
+            return device_status_sound_map['default']
     elif device == 'AirPods' or 'Powerbeats3' or 'BeatsX' or 'Beats Solo3':
         if state == 'Case:Closed':
-            return ''
-
+            return device_status_sound_map['case_closed']
         elif state == 'Case:open':
-            return ''
-
-        elif state == 'Case:All out':
-            return ''
-
-        elif re.search(r'\bout\b', state):
-            return ''
-
-        elif re.search(r'\bin\b', state):
-            return ''
-
+            return device_status_sound_map['case_open']
+        elif re.search(r'\bout\b', state) or re.search(r'\bin\b', state):
+            return device_status_sound_map['airpods_action']
         else:
-            return 'default_action'
-
+            return device_status_sound_map['default']
     else:
-        return 'default_action'
+        return device_status_sound_map['default']
 
 
 def play_sound(sound, volume=0.5):
