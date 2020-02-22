@@ -24,23 +24,33 @@ from threading import Thread, Timer
 import bluetooth._bluetooth as bluez
 from utils.bluetooth_utils import (toggle_device, enable_le_scan, parse_le_advertising_events, disable_le_scan,
                                    raw_packet_to_str, start_le_advertising, stop_le_advertising)
+from ble_forest import (handle_new_data, remove_from_state)
 
 help_desc = '''
 Apple bleee. Apple device sniffer
 ---chipik
 '''
 urllib3.disable_warnings()
-parser = argparse.ArgumentParser(description=help_desc, formatter_class=argparse.RawTextHelpFormatter)
-parser.add_argument('-c', '--check_hash', action='store_true', help='Get phone number by hash')
-parser.add_argument('-n', '--check_phone', action='store_true', help='Get user info by phone number (TrueCaller/etc)')
-parser.add_argument('-r', '--check_region', action='store_true', help='Get phone number region info')
+parser = argparse.ArgumentParser(
+    description=help_desc, formatter_class=argparse.RawTextHelpFormatter)
+parser.add_argument('-c', '--check_hash', action='store_true',
+                    help='Get phone number by hash')
+parser.add_argument('-n', '--check_phone', action='store_true',
+                    help='Get user info by phone number (TrueCaller/etc)')
+parser.add_argument('-r', '--check_region', action='store_true',
+                    help='Get phone number region info')
 parser.add_argument('-l', '--check_hlr', action='store_true',
                     help='Get phone number info by HLR request (hlrlookup.com)')
-parser.add_argument('-s', '--ssid', action='store_true', help='Get SSID from requests')
-parser.add_argument('-m', '--message', action='store_true', help='Send iMessage to the victim')
-parser.add_argument('-a', '--airdrop', action='store_true', help='Get info from AWDL')
-parser.add_argument('-d', '--active', action='store_true', help='Get devices names (gatttool)')
-parser.add_argument('-v', '--verb', help='Verbose output. Filter actions (All, Nearby, Handoff, etc)')
+parser.add_argument('-s', '--ssid', action='store_true',
+                    help='Get SSID from requests')
+parser.add_argument('-m', '--message', action='store_true',
+                    help='Send iMessage to the victim')
+parser.add_argument('-a', '--airdrop', action='store_true',
+                    help='Get info from AWDL')
+parser.add_argument('-d', '--active', action='store_true',
+                    help='Get devices names (gatttool)')
+parser.add_argument(
+    '-v', '--verb', help='Verbose output. Filter actions (All, Nearby, Handoff, etc)')
 parser.add_argument('-t', '--ttl', type=int, default=15, help='ttl')
 args = parser.parse_args()
 
@@ -55,9 +65,11 @@ hash2phone_url = ''  # URL to hash2phone matcher
 hash2phone_db = "hash2phone/phones.db"
 hlr_key = ''  # hlrlookup.com key here
 hlr_pwd = ''  # hlrlookup.com password here
-hlr_api_url = 'https://www.hlrlookup.com/api/hlr/?apikey={}&password={}&msisdn='.format(hlr_key, hlr_pwd)
+hlr_api_url = 'https://www.hlrlookup.com/api/hlr/?apikey={}&password={}&msisdn='.format(
+    hlr_key, hlr_pwd)
 region_check_url = ''  # URL to region checker here
-imessage_url = ''  # URL to iMessage sender (sorry, but we did some RE for that :) )
+# URL to iMessage sender (sorry, but we did some RE for that :) )
+imessage_url = ''
 iwdev = 'wlan0'
 apple_company_id = 'ff4c00'
 
@@ -67,7 +79,8 @@ toggle_device(dev_id, True)
 sock = 0
 titles = ['Mac', 'State', 'Device', 'WI-FI', 'OS', 'Phone', 'Time', 'Notes']
 dev_sig = {'02010': 'MacBook', '02011': 'iPhone'}
-dev_types = ["iPad", "iPhone", "MacOS", "AirPods", "Powerbeats3", "BeatsX", "Beats Solo3"]
+dev_types = ["iPad", "iPhone", "MacOS", "AirPods",
+             "Powerbeats3", "BeatsX", "Beats Solo3"]
 phones = {}
 resolved_devs = []
 resolved_macs = []
@@ -414,7 +427,8 @@ if args.check_region:
         exit(1)
 if args.message:
     if not imessage_url:
-        print("You have to specify iMessage_url if you want to send iMessages to the victim")
+        print(
+            "You have to specify iMessage_url if you want to send iMessages to the victim")
         exit(1)
 
 
@@ -452,11 +466,14 @@ class MainForm(npyscreen.FormBaseNew):
         self.add_handlers(new_handlers)
         y, x = self.useable_space()
         if args.airdrop:
-            self.gd = self.add(MyGrid, col_titles=titles, column_width=20, max_height=y // 2)
+            self.gd = self.add(MyGrid, col_titles=titles,
+                               column_width=20, max_height=y // 2)
             self.OutputBox = self.add(OutputBox, editable=False)
         elif args.verb:
-            self.gd = self.add(MyGrid, col_titles=titles, column_width=20, max_height=y // 2)
-            self.VerbOutputBox = self.add(VerbOutputBox, editable=False, name=logFile)
+            self.gd = self.add(MyGrid, col_titles=titles,
+                               column_width=20, max_height=y // 2)
+            self.VerbOutputBox = self.add(
+                VerbOutputBox, editable=False, name=logFile)
         else:
             self.gd = self.add(MyGrid, col_titles=titles, column_width=20)
         self.gd.values = []
@@ -482,9 +499,11 @@ class MainForm(npyscreen.FormBaseNew):
         global resolved_devs
         # self.get_all_dev_names()
         dev_name = ''
-        kill = lambda process: process.kill()
-        cmd = ['gatttool', '-t', 'random', '--char-read', '--uuid=0x2a24', '-b', mac_addr]
-        proc = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        def kill(process): return process.kill()
+        cmd = ['gatttool', '-t', 'random', '--char-read',
+               '--uuid=0x2a24', '-b', mac_addr]
+        proc = subprocess.Popen(
+            cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         timer = Timer(3, kill, [proc])
         try:
             timer.start()
@@ -492,7 +511,8 @@ class MainForm(npyscreen.FormBaseNew):
         finally:
             timer.cancel()
         if dev_name:
-            d_n_hex = dev_name.split(b"value:")[1].replace(b" ", b"").replace(b"\n", b"")
+            d_n_hex = dev_name.split(b"value:")[1].replace(
+                b" ", b"").replace(b"\n", b"")
             d_n_str = bytes.fromhex(d_n_hex.decode("utf-8")).decode('utf-8')
             return_value = devices_models[d_n_str]
         else:
@@ -508,7 +528,7 @@ class MainForm(npyscreen.FormBaseNew):
         for phone in phones:
             # print (phones[phone])
             if (phones[phone]['device'] == 'MacBook' or phones[phone][
-                'device'] == 'iPhone') and phone not in resolved_devs:
+                    'device'] == 'iPhone') and phone not in resolved_devs:
                 # print(f"checking {phone}")
                 self.get_dev_name(phone)
 
@@ -569,9 +589,11 @@ class MainForm(npyscreen.FormBaseNew):
                     hash2phone[self.get_mac_val_from_cell()]['appleID_hash'],
                     hash2phone[self.get_mac_val_from_cell()]['SSID_hash'],
                     get_dict_val(dictOfss, hash2phone[self.get_mac_val_from_cell()]['SSID_hash']))
-                table = print_results2(hash2phone[self.get_mac_val_from_cell()]['phone_info'])
+                table = print_results2(
+                    hash2phone[self.get_mac_val_from_cell()]['phone_info'])
                 rez = "{}\n\n{}".format(hashinfo, table)
-                npyscreen.notify_confirm(rez, title="Phone number info", wrap=True, wide=True, editw=0)
+                npyscreen.notify_confirm(
+                    rez, title="Phone number info", wrap=True, wide=True, editw=0)
 
 
 def clear_zombies():
@@ -580,6 +602,7 @@ def clear_zombies():
     for k in list(phones):
         if cur_time - phones[k]['time'] > args.ttl:
             del phones[k]
+            remove_from_state(k)
             if resolved_macs.count(k):
                 resolved_macs.remove(k)
             if resolved_devs.count(k):
@@ -595,6 +618,7 @@ def print_results():
     for phone in phones:
         row.append([phone, phones[phone]['state'], phones[phone]['device'], phones[phone]['wifi'], phones[phone]['os'],
                     phones[phone]['phone'], phones[phone]['time'], phones[phone]['notes']])
+        handle_new_data(phones)
     return row
 
 
@@ -683,11 +707,13 @@ def parse_nearby(mac, header, data):
     put_verb_message("Nearby:{}".format(json.dumps(result)), mac)
     state = os_state = wifi_state = unkn = '<unknown>'
     if args.verb:
-        state = os_state = wifi_state = unkn = '<unknown>({})'.format(result['status'])
+        state = os_state = wifi_state = unkn = '<unknown>({})'.format(
+            result['status'])
     if result['status'] in phone_states.keys():
         state = phone_states[result['status']]
         if args.verb:
-            state = '{}({})'.format(phone_states[result['status']], result['status'])
+            state = '{}({})'.format(
+                phone_states[result['status']], result['status'])
     dev_val = unkn
     for dev in dev_sig:
         if dev in header:
@@ -771,7 +797,8 @@ def parse_wifi_set(mac, data):
     if mac in resolved_macs or mac in resolved_devs:
         phones[mac]['state'] = 'WiFi screen'
     else:
-        phones[mac] = {'state': unkn, 'device': unkn, 'wifi': unkn, 'os': unkn, 'phone': '', 'time': int(time.time())}
+        phones[mac] = {'state': unkn, 'device': unkn, 'wifi': unkn,
+                       'os': unkn, 'phone': '', 'time': int(time.time())}
         resolved_macs.append(mac)
 
 
@@ -793,7 +820,8 @@ def parse_hotspot(mac, data):
     put_verb_message("Hotspot:{}".format(json.dumps(result)), mac)
     notes = hotspot_net[result['cell_srv']]
     if mac in resolved_macs or mac in resolved_devs:
-        phones[mac]['state'] = '{}.Bat:{}%'.format(phones[mac]['state'], int(result['battery'], 16))
+        phones[mac]['state'] = '{}.Bat:{}%'.format(
+            phones[mac]['state'], int(result['battery'], 16))
         phones[mac]['notes'] = notes
     else:
         phones[mac] = {'state': 'MagicSwitch', 'device': 'AppleWatch', 'wifi': '', 'os': '', 'phone': '',
@@ -839,7 +867,8 @@ def parse_wifi_j(mac, data):
                 thread4.daemon = True
                 thread4.start()
             if args.message:
-                thread4 = Thread(target=sendToTheVictims, args=(result['ssid_hash'],))
+                thread4 = Thread(target=sendToTheVictims,
+                                 args=(result['ssid_hash'],))
                 thread4.daemon = True
                 thread4.start()
         if resolved_macs.count(mac):
@@ -1034,7 +1063,8 @@ def parse_siri(mac, data):
 def read_packet(mac, data_str):
     if apple_company_id in data_str:
         header = data_str[:data_str.find(apple_company_id)]
-        data = data_str[data_str.find(apple_company_id) + len(apple_company_id):]
+        data = data_str[data_str.find(
+            apple_company_id) + len(apple_company_id):]
         packet = parse_ble_packet(data)
         if ble_packets_types['nearby'] in packet.keys():
             parse_nearby(mac, header, packet[ble_packets_types['nearby']])
@@ -1072,14 +1102,15 @@ def get_phone_db(hashp):
         print("No phone number found for hash '%s'" % hashp)
     else:
         phone_number_info = {
-        str(i[0]): {'phone': str(i[0]), 'name': '', 'carrier': '', 'region': '', 'status': '', 'iMessage': ''}
-        for i in phones}
+            str(i[0]): {'phone': str(i[0]), 'name': '', 'carrier': '', 'region': '', 'status': '', 'iMessage': ''}
+            for i in phones}
     conn.close()
 
 
 def get_phone_web(hash):
     global phone_number_info
-    r = requests.get(hash2phone_url, proxies=proxies, params={'hash': hash}, verify=verify)
+    r = requests.get(hash2phone_url, proxies=proxies,
+                     params={'hash': hash}, verify=verify)
     if r.status_code == 200:
         result = r.json()
         phone_number_info = {i: {'phone': '', 'name': '', 'carrier': '', 'region': '', 'status': '', 'iMessage': ''} for
@@ -1092,11 +1123,13 @@ def get_phone_web(hash):
 
 def get_hlr_info(mac):
     global phone_number_info
-    r = requests.get(hlr_api_url + ','.join(phone_number_info.keys()), proxies=proxies, verify=verify)
+    r = requests.get(hlr_api_url + ','.join(phone_number_info.keys()),
+                     proxies=proxies, verify=verify)
     if r.status_code == 200:
         result = r.json()
         for info in result:
-            phone_number_info[info]['status'] = '{}'.format(result[info]['error_text'])
+            phone_number_info[info]['status'] = '{}'.format(
+                result[info]['error_text'])
 
 
 def get_region(phone):
@@ -1105,7 +1138,8 @@ def get_region(phone):
     if r.status_code == 200:
         soup = BeautifulSoup(r.content, 'html.parser')
         text = str(soup.find("div", {"class": "itemprop_answer"}))
-        region = re.findall(r'Region:(.*?)L', text, flags=re.DOTALL)[0].replace('<br/>', '').replace('\n', '')
+        region = re.findall(
+            r'Region:(.*?)L', text, flags=re.DOTALL)[0].replace('<br/>', '').replace('\n', '')
         phone_number_info[phone]['region'] = region
     else:
         print("Something wrong! Status: {}".format(r.status_code))
@@ -1113,7 +1147,8 @@ def get_region(phone):
 
 def print_results2(data):
     x = PrettyTable()
-    x.field_names = ["Phone", "Name", "Carrier", "Region", "Status", 'iMessage']
+    x.field_names = ["Phone", "Name", "Carrier",
+                     "Region", "Status", 'iMessage']
     for phone in data:
         x.add_row([data[phone]['phone'], data[phone]['name'], data[phone]['carrier'], data[phone]['region'],
                    data[phone]['status'], data[phone]['iMessage']])
@@ -1134,7 +1169,8 @@ def pop_verb_messages():
 def get_names(lat=False):
     global phone_number_info
     for phone in phone_number_info:
-        (name, carrier, region) = get_number_info_TrueCaller('+{}'.format(phone), lat)
+        (name, carrier, region) = get_number_info_TrueCaller(
+            '+{}'.format(phone), lat)
         phone_number_info[phone]['name'] = name
         phone_number_info[phone]['carrier'] = carrier
         phone_number_info[phone]['region'] = region
@@ -1186,11 +1222,13 @@ def get_hash(data, size=6):
 
 def get_ssids():
     global dictOfss
-    proc = subprocess.Popen(['ip', 'link', 'set', iwdev, 'up'], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    proc = subprocess.Popen(['ip', 'link', 'set', iwdev, 'up'],
+                            stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     stdout, stderr = proc.communicate()
-    kill = lambda process: process.kill()
+    def kill(process): return process.kill()
     cmd = ['iwlist', iwdev, 'scan']
-    proc = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    proc = subprocess.Popen(cmd, stdout=subprocess.PIPE,
+                            stderr=subprocess.PIPE)
     timer = Timer(3, kill, [proc])
     try:
         timer.start()
@@ -1211,7 +1249,8 @@ def send_imessage(tel, text):
             "destination": "+{}".format(tel),
             "text": text
             }
-    r = requests.post(imessage_url + '/imessage', data=json.dumps(data), proxies=proxies, verify=verify)
+    r = requests.post(imessage_url + '/imessage',
+                      data=json.dumps(data), proxies=proxies, verify=verify)
     if r.status_code == 200:
         result = r.json()
         phone_number_info[tel]['iMessage'] = 'X'
@@ -1232,7 +1271,8 @@ def sendToTheVictims(SSID_hash):
         elif phone_number_info[phone]['name']:
             text = 'Hi {}! Gotcha!'.format(phone_number_info[phone]['name'])
         elif get_dict_val(dictOfss, SSID_hash):
-            text = 'Looks like you have tried to connect to WiFi:{}'.format(get_dict_val(dictOfss, SSID_hash))
+            text = 'Looks like you have tried to connect to WiFi:{}'.format(
+                get_dict_val(dictOfss, SSID_hash))
         else:
             text = 'Gotcha!'
         if args.check_hlr:
@@ -1252,7 +1292,8 @@ def adv_airdrop():
         dev_id = 0
         toggle_device(dev_id, True)
         header = (0x02, 0x01, 0x1a, 0x1b, 0xff, 0x4c, 0x00)
-        data1 = (0x05, 0x12, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01)
+        data1 = (0x05, 0x12, 0x00, 0x00, 0x00,
+                 0x00, 0x00, 0x00, 0x00, 0x00, 0x01)
         apple_id = (0x00, 0x00)
         phone = (0x00, 0x00)
         email = (0xb7, 0x9b)
@@ -1278,7 +1319,8 @@ def print_results3(data):
     x = PrettyTable()
     x.field_names = ["Name", "Host", "OS", "Discoverable", 'Address']
     for dev in u_data:
-        x.add_row([dev['name'], dev['host'], dev['os'], dev['discoverable'], dev['address']])
+        x.add_row([dev['name'], dev['host'], dev['os'],
+                   dev['discoverable'], dev['address']])
     return x.get_string()
 
 
