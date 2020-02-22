@@ -5,9 +5,12 @@
 import os
 import pygame
 import random
+import re
 import time
 
+
 # -----> Media <-----
+
 
 # dirs
 mda_dir = 'media/'
@@ -39,10 +42,6 @@ aml_woodpecker_pecking = 'woodpecker_pecking'
 
 aml_media_path = mda_dir + aml_dir
 
-# NOTE:
-# may want to randomize volume for every time
-# a sound is played. will "feel" more dynamic...?
-
 # good
 
 aml_killdeer_path = aml_media_path + aml_killdeer + '.wav'
@@ -64,6 +63,7 @@ aml_tawny_owl_call_path = aml_media_path + aml_tawny_owl_call + '.wav'
 # potentially annoying...
 aml_cuckoo_bird_song_path = aml_media_path + aml_cuckoo_bird_song + '.wav'
 
+
 # -----> Init Pygame <-----
 
 
@@ -77,47 +77,43 @@ pygame.init()
 # set number of channels (default: 8)
 pygame.mixer.set_num_channels(500)
 
+
 # -----> apple_ble Data <-----
 
-# NOTE: Use apple_ble vars to track changes (find them...)
-previous_data = []
 
-#  NOTE: apple_ble uses area for printing, have it just pass
-#        object and can run comparision here --or--
-#        use their zombie fn to remove items from state
+state = {}
 
-# data = [
-#     phone,
-#     phones[phone]['state'],
-#     phones[phone]['device'],
-#     phones[phone]['wifi'],
-#     phones[phone]['os'],
-#     phones[phone]['phone'],
-#     phones[phone]['time'],
-#     phones[phone]['notes']
-# ]
+number_devices = 0
 
-# sock = 0
-# titles = ['Mac', 'State', 'Device', 'WI-FI', 'OS', 'Phone', 'Time', 'Notes']
-# dev_sig = {'02010': 'MacBook', '02011': 'iPhone'}
-# dev_types = ["iPad", "iPhone", "MacOS", "AirPods",
-#              "Powerbeats3", "BeatsX", "Beats Solo3"]
-
-# device_action_sound_map = {
-#     'phone': pygame.mixer.Sound(aml_frogs_path),
-#     'MacBook': pygame.mixer.Sound(aml_american_woodcock_path),
-#     'Watch': pygame.mixer.Sound(aml_killdeer_path),
-#     'airpods': pygame.mixer.Sound(aml_meadowlark_path),
-#     'Idle': pygame.mixer.Sound(aml_peacock_path),
-#     'Lock screen': pygame.mixer.Sound(aml_warbling_vireo_path),
-#     'Home screen': pygame.mixer.Sound(aml_quail_call_path),
-#     'Off': pygame.mixer.Sound(aml_crane_call_path),
-#     'Music': pygame.mixer.Sound(aml_crow_path),
-#     'Disabled': pygame.mixer.Sound(aml_cuckoo_bird_song_path),
-#     'Case:open': pygame.mixer.Sound(aml_eurasian_collared_dove_call_path),
-#     'Case:Closed': pygame.mixer.Sound(aml_tawny_owl_call_path),
-#     'Case:All out': pygame.mixer.Sound(aml_woodpecker_pecking_path),
+# carl = {
+#     'C8:69:CD:0E:13:E4': {
+#         'state': 'Disabled',
+#         'device': 'iPhone',
+#         'wifi': 'On',
+#         'os': 'iOS13',
+#         'phone': '',
+#         'time': 1581980104,
+#         'notes': ''
+#     },
+#     "...": {}
 # }
+
+device_action_sound_map = {
+    'phone': pygame.mixer.Sound(aml_frogs_path),
+    'MacBook': pygame.mixer.Sound(aml_american_woodcock_path),
+    'Watch': pygame.mixer.Sound(aml_killdeer_path),
+    'airpods': pygame.mixer.Sound(aml_meadowlark_path),
+    'Idle': pygame.mixer.Sound(aml_peacock_path),
+    'Lock screen': pygame.mixer.Sound(aml_warbling_vireo_path),
+    'Home screen': pygame.mixer.Sound(aml_quail_call_path),
+    'Off': pygame.mixer.Sound(aml_crane_call_path),
+    'Music': pygame.mixer.Sound(aml_crow_path),
+    'Disabled': pygame.mixer.Sound(aml_cuckoo_bird_song_path),
+    'Case:open': pygame.mixer.Sound(aml_eurasian_collared_dove_call_path),
+    'Case:Closed': pygame.mixer.Sound(aml_tawny_owl_call_path),
+    'Case:All out': pygame.mixer.Sound(aml_woodpecker_pecking_path),
+}
+
 
 # -----> Init Background Audio <-----
 
@@ -144,75 +140,125 @@ pygame.mixer.music.set_volume(bg_sound_volume)
 # init bg sound - loop forever
 pygame.mixer.music.play(loops=-1)
 
+
 # -----> Data Handlers <-----
 
 
 # TODO: How to handle apple_ble data
-# - 1) `print_results()` is called(apple_ble)
-#     - 1.1) `clear_zombies()` is called(apple_ble)
-#     - 1.1.1) call custom fn to remove dev from custom audio state
-#   		- 1.1.2) decrease number of dev's
-#    	- 1.2) custom data handler called
-# - 2) custom data handler
-#    	- 2.1) receive data and compare to state
-#   		- 2.1.1) keep if in state
-#    	- 2.2) those not in state are new
-#   		- 2.2.1) increase number of dev's
-#   		- 2.2.2) play sound(use fn to determine type) for each new dev
+# - 1.0) `print_results()` is called (apple_ble)
+#     - 1.1) `clear_zombies()` is called (apple_ble)
+#       - 1.1.1) call custom fn to remove dev from custom audio state
+#   	- 1.1.2) decrease number of dev's
+#    - 1.2) custom data handler called (see 2.0)
+# - 2.0) custom data handler
+#    - 2.1) receive data and compare to state
+#   	- 2.1.1) keep if in state
+#    - 2.2) those not in state are new
+#   	- 2.2.1) increase number of dev's
+#   	- 2.2.2) play sound(use fn to determine type) for each new dev
 
 def handle_new_data(data):
-    print("new data", data)
+    print('new data')
+    update_state(data)
 
-# NOTE: switch examples
 
-# 1
-# def which_type(data):
-    # switch = {
-    #     "os_a": "January",
-    #     "os_b": "February",
+def update_state(devices):
+    for dev in devices:
+        dev_data = devices[dev]
+
+        if dev in state:
+            handle_device_status_change(dev, dev_data)
+
+        if dev not in state:
+            handle_new_device(dev, dev_data)
+
+
+def handle_device_status_change(dev, dev_data):
+    print('device status has changed')
+    sound = which_sound(dev_data['device'], dev_data['state'])
+    play_sound(sound)
+
+
+def handle_new_device(dev, dev_data):
+    print('new device')
+    state[dev] = dev_data
+
+    # - increment number of devices
+    # - play audio for device type
+    # -
+
+    # carl = {
+    #     'C8:69:CD:0E:13:E4': {
+    #         'state': 'Disabled',
+    #         'device': 'iPhone',
+    #         'wifi': 'On',
+    #         'os': 'iOS13',
+    #         'phone': '',
+    #         'time': 1581980104,
+    #         'notes': ''
+    #     },
+    #     "...": {}
     # }
-    # func = switch.get(data.type)
-    # print(func, "invalid os")
-    # return func
-
-# 2
-# def parse_os_wifi_code(code, dev):
-#     if code == '1c':
-#         if dev == 'MacBook':
-#             return ('Mac OS', 'On')
-#         else:
-#             return ('iOS12', 'On')
-#     elif code == '18':
-#         if dev == 'MacBook':
-#             return ('Mac OS', 'Off')
-#         else:
-#             return ('iOS12', 'Off')
-#     elif code == '10':
-#         return ('iOS11', '<unknown>')
-#     elif code == '1e':
-#         return ('iOS13', 'On')
-#     elif code == '1a':
-#         return ('iOS13', 'Off')
-#     elif code == '0e':
-#     else:
-#         return ('', '')
-
-# -----> Effect Handlers <-----
 
 
-def play_sound(sound_name, volume=0.5):
-    to_play = device_action_sound_map[sound_name]
-    to_play.set_volume(bg_sound_volume)
+# -----> Sound Handlers <-----
+
+def which_sound(device, state):
+    # WARN: RETURN THIS: `to_play = device_action_sound_map[sound_name]`
+
+    if device == 'iPad' or 'iPhone' or 'MacOS':
+        if state == 'Idle':
+            return ''
+
+        elif state == 'Lock screen':
+            return ''
+
+        elif state == 'Home screen':
+            return ''
+
+        elif state == 'Off':
+            return ''
+
+        else:
+            return 'default_action'
+
+    elif device == 'AirPods' or 'Powerbeats3' or 'BeatsX' or 'Beats Solo3':
+        if state == 'Case:Closed':
+            return ''
+
+        elif state == 'Case:open':
+            return ''
+
+        elif state == 'Case:All out':
+            return ''
+
+        elif re.search(r'\bout\b', state):
+            return ''
+
+        elif re.search(r'\bin\b', state):
+            return ''
+
+        else:
+            return 'default_action'
+
+    else:
+        return 'default_action'
+
+
+def play_sound(sound, volume=0.5):
+    # NOTE:
+    # may want to randomize volume for every time
+    # a sound is played. will "feel" more dynamic...?
+    sound.set_volume(volume)
 
     # find_channel(): find and return an inactive Channel.
     # if no inactive channels and the force argument is True,
     # will find the Channel with the longest running Sound and return it.
-    pygame.mixer.find_channel(True).play(to_play)
-
-# -----> State Handlers <----- (may not need)
+    pygame.mixer.find_channel(True).play(sound)
 
 
 # -----> Dev Helpers <-----
+
 
 SOUND_LIST = [
     aml_killdeer_path,
