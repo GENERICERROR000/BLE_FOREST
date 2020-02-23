@@ -147,7 +147,7 @@ def update_state(devices):
         dev_data = devices[dev]
 
         if dev in state:
-            if cmp(state, devices) == 0:
+            if state != devices:
                 handle_device_status_change(dev, dev_data)
 
         if dev not in state:
