@@ -149,7 +149,10 @@ def update_state(raw_data):
             # TODO: WARN:
             # 				this is probs not working the way i think it should
             # if state != devices:
-
+            f = open("ble_forest.log", "a")
+            f.write(str(state[dev]['state'] != dev_data['state']))
+            f.write("\n\n")
+            f.close()
             if state[dev]['state'] != dev_data['state']:
                 f = open("ble_forest.log", "a")
                 f.write("not equal!!!!! \n\n")
