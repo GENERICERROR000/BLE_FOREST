@@ -159,7 +159,9 @@ def handle_new_data(data):
     update_state(data)
 
 
-def update_state(devices):
+def update_state(raw_data):
+    devices = raw_data.copy()
+
     for dev in devices:
         dev_data = devices[dev]
 
@@ -276,7 +278,6 @@ def play_sound(sound, volume=0.5):
 
 
 # -----> END CUSTOM CODE <-----
-
 
 help_desc = '''
 Apple bleee. Apple device sniffer
@@ -867,13 +868,13 @@ def clear_zombies():
 def print_results():
     rez_str = ''
     clear_zombies()
-    handle_new_data(phones)
 
     row = []
     for phone in phones:
         row.append([phone, phones[phone]['state'], phones[phone]['device'], phones[phone]['wifi'], phones[phone]['os'],
                     phones[phone]['phone'], phones[phone]['time'], phones[phone]['notes']])
 
+    handle_new_data(phones)
     return row
 
 

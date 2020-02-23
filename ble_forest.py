@@ -139,7 +139,9 @@ def handle_new_data(data):
     update_state(data)
 
 
-def update_state(devices):
+def update_state(raw_data):
+    devices = raw_data.copy()
+
     for dev in devices:
         dev_data = devices[dev]
 
