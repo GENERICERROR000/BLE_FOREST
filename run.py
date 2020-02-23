@@ -169,18 +169,18 @@ def update_state(raw_data):
             # TODO: WARN:
             # 				this is probs not working the way i think it should
             # if state != devices:
-            f = open("ble_forest.log", "a")
-            f.write("state ")
-            f.write(str(state[dev]['state']))
-            f.write("\n")
+            # f = open("ble_forest.log", "a")
+            # f.write("state ")
+            # f.write(str(state[dev]['state']))
+            # f.write("\n")
 
-            f.write("new data ")
-            f.write(str(dev_data['state']))
-            f.write("\n")
+            # f.write("new data ")
+            # f.write(str(dev_data['state']))
+            # f.write("\n")
 
-            f.write(str(state[dev]['state'] != dev_data['state']))
-            f.write("\n\n")
-            f.close()
+            # f.write(str(state[dev]['state'] != dev_data['state']))
+            # f.write("\n\n")
+            # f.close()
             if state[dev]['state'] != dev_data['state']:
                 f = open("ble_forest.log", "a")
                 f.write("not equal!!!!! \n\n")
@@ -198,6 +198,14 @@ def handle_new_device(dev, dev_data):
     f.close()
 
     state[dev] = dev_data
+
+    carl = state[dev]
+
+    f = open("ble_forest.log", "a")
+    f.write(str(carl))
+    f.write("\n\n")
+    f.close()
+
     sound = which_sound_device(dev_data['device'])
     play_sound(sound)
     set_bg_volume()
@@ -289,6 +297,7 @@ def play_sound(sound, volume=0.5):
 
 
 # -----> END CUSTOM CODE <-----
+
 help_desc = '''
 Apple bleee. Apple device sniffer
 ---chipik
