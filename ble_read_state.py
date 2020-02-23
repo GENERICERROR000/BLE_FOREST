@@ -602,7 +602,7 @@ def clear_zombies():
     for k in list(phones):
         if cur_time - phones[k]['time'] > args.ttl:
             del phones[k]
-            # remove_from_state(k)
+            remove_from_state(k)
 
             if resolved_macs.count(k):
                 resolved_macs.remove(k)
@@ -615,8 +615,8 @@ def clear_zombies():
 def print_results():
     rez_str = ''
     clear_zombies()
-    # handle_new_data(phones)
-    print("HAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHASHAHASHAS")
+    handle_new_data(phones)
+
     row = []
     for phone in phones:
         row.append([phone, phones[phone]['state'], phones[phone]['device'], phones[phone]['wifi'], phones[phone]['os'],

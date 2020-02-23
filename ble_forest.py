@@ -147,7 +147,8 @@ def update_state(devices):
         dev_data = devices[dev]
 
         if dev in state:
-            handle_device_status_change(dev, dev_data)
+            if cmp(state, devices) == 0:
+                handle_device_status_change(dev, dev_data)
 
         if dev not in state:
             handle_new_device(dev, dev_data)
@@ -230,15 +231,16 @@ def which_sound_state(device, state):
 
 
 def play_sound(sound, volume=0.5):
-    # NOTE:
-    # may want to randomize volume for every time
-    # a sound is played. will "feel" more dynamic...?
-    sound.set_volume(volume)
+    if sound != False:
+        # NOTE:
+        # may want to randomize volume for every time
+        # a sound is played. will "feel" more dynamic...?
+        sound.set_volume(volume)
 
-    # find_channel(): find and return an inactive Channel.
-    # if no inactive channels and the force argument is True,
-    # will find the Channel with the longest running Sound and return it.
-    pygame.mixer.find_channel(True).play(sound)
+        # find_channel(): find and return an inactive Channel.
+        # if no inactive channels and the force argument is True,
+        # will find the Channel with the longest running Sound and return it.
+        pygame.mixer.find_channel(True).play(sound)
 
 
 # -----> Dev Helpers <-----
