@@ -3,11 +3,10 @@
 # authors: Noah Kernis & Sue Roh
 
 
-import os
 import pygame
-import random
 import re
-import time
+# import os
+# import time
 
 
 # -----> Media <-----
@@ -39,8 +38,7 @@ aml_eurasian_collared_dove_call = 'eurasian_collared_dove_call'
 aml_tawny_owl_call = 'tawny_owl_call'
 aml_woodpecker_pecking = 'woodpecker_pecking'
 
-### Rating For Effects ###
-
+# animal sound paths
 aml_media_path = mda_dir + aml_dir
 aml_killdeer_path = aml_media_path + aml_killdeer + '.wav'
 aml_american_woodcock_path = aml_media_path + aml_american_woodcock + '.wav'
@@ -88,7 +86,9 @@ device_status_sound_map = {
 
 state = {}
 
-# NOTE: state structure example
+# NOTE:
+# state structure example
+#
 # state = {
 #     'C8:69:CD:0E:13:E4': {
 #         'state': 'Disabled',
@@ -99,7 +99,7 @@ state = {}
 #         'time': 1581980104,
 #         'notes': ''
 #     },
-#     "...": {}
+#     "...": {...}
 # }
 
 
@@ -119,7 +119,7 @@ pygame.mixer.music.load(bg_path)
 # set init bg sound volume
 pygame.mixer.music.set_volume(0.5)
 
-# init bg sound - loop forever
+# init bg sound and loop forever
 pygame.mixer.music.play(loops=-1)
 
 
@@ -136,7 +136,11 @@ def update_state(devices):
         dev_data = devices[dev]
 
         if dev in state:
-            if state != devices:
+
+            # TODO: WARN:
+            # 				this is probs not working the way i think it should
+            # if state != devices:
+            if state[dev]['state'] != devices[dev]['state']:
                 handle_device_status_change(dev, dev_data)
 
         if dev not in state:
@@ -219,11 +223,9 @@ def which_sound_state(device, state):
 
 
 def play_sound(sound, volume=0.5):
-    # NOTE:
-    # may want to randomize volume for every time
-    # a sound is played. will "feel" more dynamic...?
     sound.set_volume(volume)
 
+    # NOTE:
     # find_channel(): find and return an inactive Channel.
     # if no inactive channels and the force argument is True,
     # will find the Channel with the longest running Sound and return it.

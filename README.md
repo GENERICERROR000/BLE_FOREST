@@ -10,11 +10,14 @@ All code for ble sniffing and utils comes from [apple_bleee - hexway ](https://g
 
 [apple_ble fork](https://github.com/nkernis/apple_bleee)
 
-- [ ] Pick Sounds
-- [ ] Background audio
+- [ ] Randomize animal sound volume?
+- [ ] Less events to trigger sound (seems to be delay...)?
+
+- [x] Pick Sounds
+- [x] Background audio
 	- Intensity mapped to # of devices
-- [ ] Map events to unique sounds
-- [ ] Connect music to apple_ble data
+- [x] Map events to unique sounds
+- [x] Connect music to apple_ble data
 	- Fn to get data from
 		- [def print_results():](https://github.com/nkernis/apple_bleee/blob/master/ble_read_state.py#L591)
 	- Fn to trigger cleaning data
@@ -22,8 +25,8 @@ All code for ble sniffing and utils comes from [apple_bleee - hexway ](https://g
 
 ### Fabrication
 
-- [ ] Design enclosure
-- [ ] Test finishing process
+- [x] Design enclosure
+- [ ] Finishing process
 	- Sand, prime, sand, paint
 - [ ] LED?
 
