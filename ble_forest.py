@@ -172,13 +172,13 @@ def remove_from_state(dev):
 def set_bg_volume():
     num_devices = len(state)
 
-    if num_devices <= 15:
+    if num_devices <= 20:
         pygame.mixer.music.set_volume(0.2)
-    elif num_devices > 15 and num_devices <= 30:
+    elif num_devices > 40 and num_devices <= 30:
         pygame.mixer.music.set_volume(0.4)
-    elif num_devices > 20 and num_devices <= 45:
+    elif num_devices > 60 and num_devices <= 45:
         pygame.mixer.music.set_volume(0.6)
-    elif num_devices > 45:
+    elif num_devices > 80:
         pygame.mixer.music.set_volume(0.8)
     else:
         pygame.mixer.music.set_volume(0.2)
