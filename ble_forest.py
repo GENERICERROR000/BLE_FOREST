@@ -127,7 +127,17 @@ pygame.mixer.music.play(loops=-1)
 
 
 def handle_new_data(data):
-    print('new data')
+
+    # NOTE: kill display
+    # npyscreen.blank_terminal()
+
+    # print('new data')
+    f = open("ble_forest.log", "a")
+    f.write("new data")
+    f.write("\n")
+    f.write("\n")
+    f.close()
+
     update_state(data)
 
 
@@ -148,7 +158,13 @@ def update_state(devices):
 
 
 def handle_new_device(dev, dev_data):
-    print('new device')
+    # print('new device')
+    f = open("ble_forest.log", "a")
+    f.write("new device")
+    f.write("\n")
+    f.write("\n")
+    f.close()
+
     state[dev] = dev_data
     sound = which_sound_device(dev_data['device'])
     play_sound(sound)
@@ -156,13 +172,25 @@ def handle_new_device(dev, dev_data):
 
 
 def handle_device_status_change(dev, dev_data):
-    print('device status has changed')
+    # print('device status has changed')
+    f = open("ble_forest.log", "a")
+    f.write("device status has changed")
+    f.write("\n")
+    f.write("\n")
+    f.close()
+
     sound = which_sound_state(dev_data['device'], dev_data['state'])
     play_sound(sound)
 
 
 def remove_from_state(dev):
-    print('removing device')
+    # print('removing device')
+    f = open("ble_forest.log", "a")
+    f.write("removing device")
+    f.write("\n")
+    f.write("\n")
+    f.close()
+
     del state[dev]
 
 

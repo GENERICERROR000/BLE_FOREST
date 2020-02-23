@@ -1579,7 +1579,3 @@ thread1.start()
 MyApp = App()
 MyApp.run()
 thread1.join()
-
-
-# NOTE: kill display
-npyscreen.blank_terminal()
