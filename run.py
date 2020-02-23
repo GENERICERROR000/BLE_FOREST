@@ -164,15 +164,14 @@ def update_state(devices):
         dev_data = devices[dev]
 
         if dev in state:
-            f = open("ble_forest.log", "a")
-            f.write("in state!!!!! \n\n")
-            f.close()
-
             # TODO: WARN:
             # 				this is probs not working the way i think it should
             # if state != devices:
 
             if state[dev]['state'] != dev_data['state']:
+                f = open("ble_forest.log", "a")
+                f.write("not equal!!!!! \n\n")
+                f.close()
                 handle_device_status_change(dev, dev_data)
 
         if dev not in state:
