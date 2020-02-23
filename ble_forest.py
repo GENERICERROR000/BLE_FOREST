@@ -2,6 +2,7 @@
 # created: 20/14/2020
 # authors: Noah Kernis & Sue Roh
 
+
 import os
 import pygame
 import random
@@ -41,27 +42,20 @@ aml_woodpecker_pecking = 'woodpecker_pecking'
 ### Rating For Effects ###
 
 aml_media_path = mda_dir + aml_dir
-
-# good
-
 aml_killdeer_path = aml_media_path + aml_killdeer + '.wav'
-aml_frogs_path = aml_media_path + aml_frogs + '.wav'
 aml_american_woodcock_path = aml_media_path + aml_american_woodcock + '.wav'
 aml_peacock_path = aml_media_path + aml_peacock + '.wav'
 aml_crow_path = aml_media_path + aml_crow + '.wav'
-aml_eurasian_collared_dove_call_path = aml_media_path + \
-    aml_eurasian_collared_dove_call + '.wav'
-aml_woodpecker_pecking_path = aml_media_path + \
-    aml_woodpecker_pecking + '.wav'  # don't overuse
-
-# long - needs edit
 aml_meadowlark_path = aml_media_path + aml_meadowlark + '.wav'
 aml_warbling_vireo_path = aml_media_path + aml_warbling_vireo + '.wav'
 aml_quail_call_path = aml_media_path + aml_quail_call + '.wav'
 aml_crane_call_path = aml_media_path + aml_crane_call + '.wav'
 aml_tawny_owl_call_path = aml_media_path + aml_tawny_owl_call + '.wav'
-# potentially annoying...
 aml_cuckoo_bird_song_path = aml_media_path + aml_cuckoo_bird_song + '.wav'
+aml_eurasian_collared_dove_call_path = aml_media_path + \
+    aml_eurasian_collared_dove_call + '.wav'
+aml_woodpecker_pecking_path = aml_media_path + \
+    aml_woodpecker_pecking + '.wav'
 
 
 # -----> Init Pygame <-----
@@ -79,18 +73,18 @@ device_status_sound_map = {
     'lock_screen': pygame.mixer.Sound(aml_american_woodcock_path),
     'home_screen': pygame.mixer.Sound(aml_killdeer_path),
     'off': pygame.mixer.Sound(aml_meadowlark_path),
-    'case_close': pygame.mixer.Sound(aml_peacock_path),
-    'case_open': pygame.mixer.Sound(aml_warbling_vireo_path),
+    'case_actions': pygame.mixer.Sound(aml_peacock_path),
     'iphone': pygame.mixer.Sound(aml_quail_call_path),
     'airpods_action': pygame.mixer.Sound(aml_crane_call_path),
     'ipad': pygame.mixer.Sound(aml_cuckoo_bird_song_path),
     'macos': pygame.mixer.Sound(aml_eurasian_collared_dove_call_path),
     'airpods': pygame.mixer.Sound(aml_tawny_owl_call_path),
-    'beats': pygame.mixer.Sound(aml_frogs_path),
-    'default': pygame.mixer.Sound(aml_crow_path)
+    'beats': pygame.mixer.Sound(aml_crow_path),
+    'default': pygame.mixer.Sound(aml_warbling_vireo_path)
 }
 
 # -----> apple_bleee Data <-----
+
 
 state = {}
 
@@ -114,14 +108,8 @@ state = {}
 
 bg_media_dir = mda_dir + bg_dir
 
-# has light thunder throughout
 bg_gentle_rain_path = bg_media_dir + bg_gentle_rain + '.wav'
-
-# better audio
-# more running water
-# short
 bg_light_rain_path = bg_media_dir + bg_light_rain + '.wav'
-
 bg_thunder_lightning_rain_path = bg_media_dir + bg_thunder_lightning_rain + '.wav'
 
 # load bg sound
@@ -136,6 +124,7 @@ pygame.mixer.music.play(loops=-1)
 
 
 # -----> Data Handlers <-----
+
 
 def handle_new_data(data):
     print('new data')
@@ -174,6 +163,7 @@ def remove_from_state(dev):
 
 
 # -----> Sound Handlers <-----
+
 
 def set_bg_volume():
     num_devices = len(state)
@@ -218,10 +208,8 @@ def which_sound_state(device, state):
         else:
             return device_status_sound_map['default']
     elif device == 'AirPods' or 'Powerbeats3' or 'BeatsX' or 'Beats Solo3':
-        if state == 'Case:Closed':
-            return device_status_sound_map['case_closed']
-        elif state == 'Case:open':
-            return device_status_sound_map['case_open']
+        if state == 'Case:Closed' or 'Case:open':
+            return device_status_sound_map['case_action']
         elif re.search(r'\bout\b', state) or re.search(r'\bin\b', state):
             return device_status_sound_map['airpods_action']
         else:
@@ -248,7 +236,6 @@ def play_sound(sound, volume=0.5):
 
 # SOUND_LIST = [
 #     aml_killdeer_path,
-#     aml_frogs_path,
 #     aml_american_woodcock_path,
 #     aml_peacock_path,
 #     aml_crow_path,
