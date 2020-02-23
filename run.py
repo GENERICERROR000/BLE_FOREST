@@ -153,9 +153,7 @@ def handle_new_data(data):
 
     # print('new data')
     f = open("ble_forest.log", "a")
-    f.write("new data")
-    f.write("\n")
-    f.write("\n")
+    f.write(". \n\n")
     f.close()
 
     update_state(data)
@@ -166,11 +164,15 @@ def update_state(devices):
         dev_data = devices[dev]
 
         if dev in state:
+            f = open("ble_forest.log", "a")
+            f.write("in state!!!!! \n\n")
+            f.close()
 
             # TODO: WARN:
             # 				this is probs not working the way i think it should
             # if state != devices:
-            if state[dev]['state'] != devices[dev]['state']:
+
+            if state[dev]['state'] != dev_data['state']:
                 handle_device_status_change(dev, dev_data)
 
         if dev not in state:
@@ -180,9 +182,7 @@ def update_state(devices):
 def handle_new_device(dev, dev_data):
     # print('new device')
     f = open("ble_forest.log", "a")
-    f.write("new device")
-    f.write("\n")
-    f.write("\n")
+    f.write("new device \n\n")
     f.close()
 
     state[dev] = dev_data
@@ -194,9 +194,7 @@ def handle_new_device(dev, dev_data):
 def handle_device_status_change(dev, dev_data):
     # print('device status has changed')
     f = open("ble_forest.log", "a")
-    f.write("device status has changed")
-    f.write("\n")
-    f.write("\n")
+    f.write("device status has changed \n\n")
     f.close()
 
     sound = which_sound_state(dev_data['device'], dev_data['state'])
@@ -206,9 +204,7 @@ def handle_device_status_change(dev, dev_data):
 def remove_from_state(dev):
     # print('removing device')
     f = open("ble_forest.log", "a")
-    f.write("removing device")
-    f.write("\n")
-    f.write("\n")
+    f.write("removing device \n\n")
     f.close()
 
     del state[dev]
