@@ -153,10 +153,12 @@ def handle_new_data(data):
 
     # print('new data')
     f = open("ble_forest.log", "a")
-    f.write(". \n\n")
+    # f.write(". \n\n")
+    f.write(str(data))
+    f.write("\n\n")
     f.close()
 
-    update_state(data)
+    # update_state(data)
 
 
 def update_state(raw_data):
@@ -893,7 +895,8 @@ def print_results():
         row.append([phone, phones[phone]['state'], phones[phone]['device'], phones[phone]['wifi'], phones[phone]['os'],
                     phones[phone]['phone'], phones[phone]['time'], phones[phone]['notes']])
 
-    handle_new_data(phones)
+    # handle_new_data(phones)
+    handle_new_data(resolved_devs)
     return row
 
 
