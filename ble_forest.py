@@ -69,8 +69,8 @@ pygame.init()
 pygame.mixer.set_num_channels(500)
 
 device_status_sound_map = {
-    'idle':  pygame.mixer.Sound(aml_woodpecker_pecking_path),
-    'lock_screen': pygame.mixer.Sound(aml_american_woodcock_path),
+    'idle':  pygame.mixer.Sound(aml_american_woodcock_path),
+    'lock_screen': pygame.mixer.Sound(aml_woodpecker_pecking_path),
     'home_screen': pygame.mixer.Sound(aml_killdeer_path),
     'off': pygame.mixer.Sound(aml_meadowlark_path),
     'case_actions': pygame.mixer.Sound(aml_peacock_path),
@@ -158,7 +158,7 @@ def handle_device_status_change(dev, dev_data):
 
 
 def remove_from_state(dev):
-    print('remiving device')
+    print('removing device')
     del state[dev]
 
 
@@ -219,53 +219,12 @@ def which_sound_state(device, state):
 
 
 def play_sound(sound, volume=0.5):
-    if sound != False:
-        # NOTE:
-        # may want to randomize volume for every time
-        # a sound is played. will "feel" more dynamic...?
-        sound.set_volume(volume)
+    # NOTE:
+    # may want to randomize volume for every time
+    # a sound is played. will "feel" more dynamic...?
+    sound.set_volume(volume)
 
-        # find_channel(): find and return an inactive Channel.
-        # if no inactive channels and the force argument is True,
-        # will find the Channel with the longest running Sound and return it.
-        pygame.mixer.find_channel(True).play(sound)
-
-
-# -----> Dev Helpers <-----
-
-
-# SOUND_LIST = [
-#     aml_killdeer_path,
-#     aml_american_woodcock_path,
-#     aml_peacock_path,
-#     aml_crow_path,
-#     aml_eurasian_collared_dove_call_path,
-#     aml_woodpecker_pecking_path,
-#     aml_meadowlark_path,
-#     aml_warbling_vireo_path,
-#     aml_quail_call_path,
-#     aml_crane_call_path,
-#     aml_tawny_owl_call_path,
-#     aml_cuckoo_bird_song_path,
-# ]
-# duration = 0
-# parth = ''
-
-# # play sound randomly
-# while True:
-#     if random.randint(0, 1000000) == 10:
-#         parth = SOUND_LIST[random.randint(0, 12)]
-
-#         test_animal_sound = pygame.mixer.Sound(parth)
-#         test_animal_sound.set_volume(0.4)
-
-#         duration = test_animal_sound.get_length()
-
-#         print(parth, 'duration:', duration)
-#         pygame.mixer.find_channel(True).play(test_animal_sound)
-#         # pygame.mixer.find_channel(True).play(TEST_ANIMAL_sound, maxtime=500)
-
-#         # pause for duration audio
-#         time.sleep(2)
-
-# time.sleep(2000)
+    # find_channel(): find and return an inactive Channel.
+    # if no inactive channels and the force argument is True,
+    # will find the Channel with the longest running Sound and return it.
+    pygame.mixer.find_channel(True).play(sound)
