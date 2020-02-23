@@ -69,7 +69,7 @@ pygame.init()
 pygame.mixer.set_num_channels(500)
 
 device_status_sound_map = {
-    'idle':  pygame.mixer.Sound(aml_american_woodcock_path),
+    'idle':  pygame.mixer.Sound(aml_eurasian_collared_dove_call_path),
     'lock_screen': pygame.mixer.Sound(aml_woodpecker_pecking_path),
     'home_screen': pygame.mixer.Sound(aml_killdeer_path),
     'off': pygame.mixer.Sound(aml_meadowlark_path),
@@ -77,7 +77,7 @@ device_status_sound_map = {
     'iphone': pygame.mixer.Sound(aml_quail_call_path),
     'airpods_action': pygame.mixer.Sound(aml_crane_call_path),
     'ipad': pygame.mixer.Sound(aml_cuckoo_bird_song_path),
-    'macos': pygame.mixer.Sound(aml_eurasian_collared_dove_call_path),
+    'macos': pygame.mixer.Sound(aml_american_woodcock_path),
     'airpods': pygame.mixer.Sound(aml_tawny_owl_call_path),
     'beats': pygame.mixer.Sound(aml_crow_path),
     'default': pygame.mixer.Sound(aml_warbling_vireo_path)
