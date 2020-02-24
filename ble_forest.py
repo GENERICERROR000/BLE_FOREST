@@ -13,7 +13,7 @@ import re
 
 
 # dirs
-mda_dir = 'media/'
+mda_dir = '/home/pi/BLE_FOREST/media/'
 bg_dir = 'background/'
 aml_dir = 'animal/'
 not_natural_dir = 'not_natural/'
