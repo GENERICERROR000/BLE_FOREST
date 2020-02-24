@@ -182,6 +182,8 @@ def update_state(raw_data):
             f.write("\n\n")
             f.close()
             if state[dev]['state'] != dev_data['state']:
+                state[dev]['state'] = dev_data['state']
+
                 f = open("ble_forest.log", "a")
                 f.write("not equal!!!!! \n\n")
                 f.close()
@@ -197,7 +199,7 @@ def handle_new_device(dev, dev_data):
     f.write("new device \n\n")
     f.close()
 
-    state[dev] = dev_data
+    state[dev] = dev_data.copy()
 
     sound = which_sound_device(dev_data['device'])
     play_sound(sound)
