@@ -273,7 +273,7 @@ def which_sound_state(device, state, dev):
 
 
 def play_sound(sound):
-    sound.set_volume(0.3)
+    sound.set_volume(0.1)
 
     # NOTE:
     # find_channel(): find and return an inactive Channel.
