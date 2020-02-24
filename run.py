@@ -995,6 +995,10 @@ def parse_nearby(mac, header, data):
         phones[mac]['wifi'] = wifi_state
         phones[mac]['os'] = os_state
         phones[mac]['time'] = int(time.time())
+
+        # NOTE: HERE
+        handle_new_data(phones)
+
         if mac not in resolved_devs:
             phones[mac]['device'] = dev_val
     else:
@@ -1002,9 +1006,6 @@ def parse_nearby(mac, header, data):
                        'notes': ''}
         phones[mac]['device'] = dev_val
         resolved_macs.append(mac)
-
-    # NOTE: HERE
-    handle_new_data(phones)
 
 
 def parse_nandoff(mac, data):
@@ -1029,9 +1030,6 @@ def parse_nandoff(mac, data):
                        'time': int(time.time()), 'notes': notes}
         resolved_macs.append(mac)
 
-    # NOTE: HERE
-    handle_new_data(phones)
-
 
 def parse_watch_c(mac, data):
     # 0          2       3
@@ -1050,13 +1048,13 @@ def parse_watch_c(mac, data):
         phones[mac]['state'] = 'MagicSwitch'
         phones[mac]['time'] = int(time.time())
         phones[mac]['notes'] = notes
+
+        # NOTE: HERE
+        handle_new_data(phones)
     else:
         phones[mac] = {'state': 'MagicSwitch', 'device': 'AppleWatch', 'wifi': '', 'os': '', 'phone': '',
                        'time': int(time.time()), 'notes': notes}
         resolved_macs.append(mac)
-
-    # NOTE: HERE
-    handle_new_data(phones)
 
 
 def parse_wifi_set(mac, data):
