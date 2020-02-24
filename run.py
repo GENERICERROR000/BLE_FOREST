@@ -102,7 +102,7 @@ pygame.mixer.init()
 pygame.init()
 
 # set number of channels (default: 8)
-pygame.mixer.set_num_channels(20)
+pygame.mixer.set_num_channels(500)
 
 device_status_sound_map = {
     'idle':  pygame.mixer.Sound(aml_eurasian_collared_dove_call_path),
