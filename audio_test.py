@@ -12,7 +12,7 @@ bg_media_dir = mda_dir + bg_dir
 bg_rainforest_path = bg_media_dir + bg_rainforest_ambiance + '.wav'
 
 pygame.mixer.pre_init()
-pygame.mixer.init(48000, 16, 1, 1024)
+pygame.mixer.init(48000, 16, 2, 1024)
 pygame.init()
 
 # load bg sound
