@@ -97,8 +97,9 @@ not_natural_blop_path = not_natural_media_path + not_natural_blop + '.wav'
 
 # init pygame
 # pygame.mixer.pre_init()
-pygame.mixer.init(48000, -16, 1, 1024)
-# pygame.init()
+pygame.mixer.pre_init(48000, -16, 1, 1024)
+# pygame.mixer.init(48000, -16, 1, 1024)
+pygame.init()
 
 # set number of channels (default: 8)
 pygame.mixer.set_num_channels(100)
