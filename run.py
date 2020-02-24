@@ -100,7 +100,7 @@ pygame.mixer.pre_init()
 # pygame.mixer.init()
 
 # pygame.mixer.init(44100, -16, 200, 1024)
-pygame.mixer.init(44100, 16, 200, 2048)
+pygame.mixer.init(44100, -16, 200, 2048)
 
 pygame.init()
 
