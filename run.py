@@ -65,6 +65,7 @@ not_natural_blop = 'blop'
 # background paths
 bg_media_dir = mda_dir + bg_dir
 
+bg_rainforest_path = bg_media_dir + bg_rainforest_ambiance + '.wav'
 bg_gentle_rain_path = bg_media_dir + bg_gentle_rain + '.wav'
 bg_light_rain_path = bg_media_dir + bg_light_rain + '.wav'
 bg_thunder_lightning_rain_path = bg_media_dir + bg_thunder_lightning_rain + '.wav'
@@ -143,8 +144,7 @@ state = {}
 # -----> Init Background Audio <-----
 
 # load bg sound
-bg_path = bg_media_dir + bg_rainforest_ambiance + '.wav'
-pygame.mixer.music.load(bg_path)
+pygame.mixer.music.load(bg_rainforest_path)
 
 # set init bg sound volume
 pygame.mixer.music.set_volume(0.5)
@@ -157,10 +157,6 @@ pygame.mixer.music.play(loops=-1)
 
 
 def handle_new_data(data):
-
-    # NOTE: kill display
-    # npyscreen.blank_terminal()
-
     # print('new data')
     # f = open("ble_forest.log", "a")
     # f.write(". \n\n")
@@ -176,28 +172,8 @@ def update_state(raw_data):
         dev_data = devices[dev]
 
         if dev in state:
-            # TODO: WARN:
-            # 				this is probs not working the way i think it should
-            # if state != devices:
-            # f = open("ble_forest.log", "a")
-            # f.write("state ")
-            # f.write(str(state[dev]['state']))
-            # f.write("\n")
-
-            # f.write("new data ")
-            # f.write(str(dev_data['state']))
-            # f.write("\n")
-
-            # f.write(str(state[dev]['state'] != dev_data['state']))
-            # f.write("\n\n")
-            # f.close()
             if state[dev]['state'] != dev_data['state']:
-                state[dev]['state'] = dev_data['state']
-
-                f = open("ble_forest.log", "a")
-                f.write("not equal!!!!! \n\n")
-                f.close()
-                handle_device_status_change(dev, dev_data)
+                handle_device_state_change(dev, dev_data)
 
         if dev not in state:
             handle_new_device(dev, dev_data)
@@ -205,9 +181,9 @@ def update_state(raw_data):
 
 def handle_new_device(dev, dev_data):
     # print('new device')
-    f = open("ble_forest.log", "a")
-    f.write("new device \n\n")
-    f.close()
+    # f = open("ble_forest.log", "a")
+    # f.write("new device \n\n")
+    # f.close()
 
     state[dev] = dev_data.copy()
 
@@ -216,11 +192,11 @@ def handle_new_device(dev, dev_data):
     set_bg_volume()
 
 
-def handle_device_status_change(dev, dev_data):
+def handle_device_state_change(dev, dev_data):
     # print('device status has changed')
-    f = open("ble_forest.log", "a")
-    f.write("device status has changed \n\n")
-    f.close()
+    # f = open("ble_forest.log", "a")
+    # f.write("device status has changed \n\n")
+    # f.close()
 
     sound = which_sound_state(dev_data['device'], dev_data['state'], dev)
     play_sound(sound)
@@ -228,9 +204,9 @@ def handle_device_status_change(dev, dev_data):
 
 def remove_from_state(dev):
     # print('removing device')
-    f = open("ble_forest.log", "a")
-    f.write("removing device \n\n")
-    f.close()
+    # f = open("ble_forest.log", "a")
+    # f.write("removing device \n\n")
+    # f.close()
 
     del state[dev]
 
@@ -242,13 +218,13 @@ def set_bg_volume():
     num_devices = len(state)
 
     if num_devices <= 20:
-        pygame.mixer.music.set_volume(0.2)
+        pygame.mixer.music.set_volume(0.1)
     elif num_devices > 40 and num_devices <= 30:
-        pygame.mixer.music.set_volume(0.4)
+        pygame.mixer.music.set_volume(0.2)
     elif num_devices > 60 and num_devices <= 45:
-        pygame.mixer.music.set_volume(0.6)
+        pygame.mixer.music.set_volume(0.3)
     elif num_devices > 80:
-        pygame.mixer.music.set_volume(0.8)
+        pygame.mixer.music.set_volume(0.4)
     else:
         pygame.mixer.music.set_volume(0.2)
 
@@ -296,8 +272,8 @@ def which_sound_state(device, state, dev):
         return device_status_sound_map['default']
 
 
-def play_sound(sound, volume=0.5):
-    sound.set_volume(volume)
+def play_sound(sound):
+    sound.set_volume(0.3)
 
     # NOTE:
     # find_channel(): find and return an inactive Channel.
