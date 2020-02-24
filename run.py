@@ -311,7 +311,7 @@ def play_sound(sound, volume=0.5):
     # find_channel(): find and return an inactive Channel.
     # if no inactive channels and the force argument is True,
     # will find the Channel with the longest running Sound and return it.
-    if datetime.now(then.tzinfo) - then > timedelta(0, 5):
+    if datetime.now(then.tzinfo) - then > timedelta(0, 10):
         pygame.mixer.find_channel(True).play(sound)
 
 
