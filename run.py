@@ -97,11 +97,14 @@ not_natural_blop_path = not_natural_media_path + not_natural_blop + '.wav'
 
 # init pygame
 pygame.mixer.pre_init()
-pygame.mixer.init()
+# pygame.mixer.init()
+
+pygame.mixer.init(48000, -16, 500, 1024)
+
 pygame.init()
 
 # set number of channels (default: 8)
-pygame.mixer.set_num_channels(500)
+# pygame.mixer.set_num_channels(500)
 
 device_status_sound_map = {
     'idle':  pygame.mixer.Sound(aml_eurasian_collared_dove_call_path),
@@ -147,7 +150,7 @@ state = {}
 pygame.mixer.music.load(bg_rainforest_path)
 
 # set init bg sound volume
-pygame.mixer.music.set_volume(0.5)
+pygame.mixer.music.set_volume(0.1)
 
 # init bg sound and loop forever
 pygame.mixer.music.play(loops=-1)
