@@ -1,20 +1,34 @@
 # BLE FOREST
 
+## apple_ble
+
+All code for ble sniffing and utils comes from [apple_bleee - hexway ](https://github.com/hexway/apple_bleee)
+
 ## TODO
+
+57:C1:C5...
 
 ### Code
 
-- [ ] Pick Sounds
-- [ ] Background audio
+[apple_ble fork](https://github.com/nkernis/apple_bleee)
+
+- [ ] Randomize animal sound volume?
+- [ ] Less events to trigger sound (seems to be delay...)?
+
+- [x] Pick Sounds
+- [x] Background audio
 	- Intensity mapped to # of devices
-- [ ] Map events to unique sounds
-- [ ] Connect music to apple_ble data
-	- [def print_results():](https://github.com/hexway/apple_bleee/blob/master/ble_read_state.py#L591)
+- [x] Map events to unique sounds
+- [x] Connect music to apple_ble data
+	- Fn to get data from
+		- [def print_results():](https://github.com/nkernis/apple_bleee/blob/master/ble_read_state.py#L591)
+	- Fn to trigger cleaning data
+		- [def clear_zombies():](https://github.com/nkernis/apple_bleee/blob/master/ble_read_state.py#L577)
 
 ### Fabrication
 
-- [ ] Design enclosure
-- [ ] Test finishing process
+- [x] Design enclosure
+- [ ] Finishing process
 	- Sand, prime, sand, paint
 - [ ] LED?
 
@@ -24,6 +38,26 @@
 
 - https://www.pygame.org/docs/ref/music.html
 - https://github.com/hexway/apple_bleee
+	- https://hexway.io/research/apple-bleee/
+
+#### Setting Up RPI
+
+- How to instal
+	- https://github.com/nkernis/apple_bleee
+- If issue with `LC_ALL` and the rest
+	- https://raspberrypi.stackexchange.com/questions/43550/unable-to-reconfigure-locale-in-raspberry-pi
+- Install python3 on Raspian
+	- `sudo apt install python3 -y`
+	- If need to remove manual installation
+		- `apt-get autoremove python3`
+- Fix for Pillow (just requirements)
+	- https://github.com/python-pillow/Pillow/issues/3077#issuecomment-518978148
+- bs4
+	- https://stackoverflow.com/questions/11783875/importerror-no-module-named-bs4-beautifulsoup
+- socket.AF_BLUETOOTH (WARN: must be done before compiling python3)
+	- https://stackoverflow.com/questions/29107537/missing-socket-af-bluetooth-in-anaconda-python
+- can't install pygame
+	- https://forum.ubiquityrobotics.com/t/im-trying-to-install-some-software-packages-but-i-keep-getting-errors/363/3
 
 ### Fabrication
 

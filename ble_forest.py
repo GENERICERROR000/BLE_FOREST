@@ -2,27 +2,21 @@
 # created: 20/14/2020
 # authors: Noah Kernis & Sue Roh
 
-import os
+
 import pygame
-import random
-import time
+import re
+# import os
+# import time
 
-# -----> APPLE_BLE Data <-----
-
-currentState = {
-
-}
-
-deviceTypes = {
-
-}
 
 # -----> Media <-----
+
 
 # dirs
 mda_dir = 'media/'
 bg_dir = 'background/'
 aml_dir = 'animal/'
+not_natural_dir = 'not_natural/'
 
 # background sounds
 bg_rainforest_ambiance = 'rainforest_ambiance'
@@ -45,10 +39,41 @@ aml_eurasian_collared_dove_call = 'eurasian_collared_dove_call'
 aml_tawny_owl_call = 'tawny_owl_call'
 aml_woodpecker_pecking = 'woodpecker_pecking'
 
-# -----> Init Audio <-----
+# not natural sounds
+not_natural_blop = 'blop'
 
+# background paths
+bg_media_dir = mda_dir + bg_dir
 
-bg_sound_volume = 0.5
+bg_rainforest_path = bg_media_dir + bg_rainforest_ambiance + '.wav'
+bg_gentle_rain_path = bg_media_dir + bg_gentle_rain + '.wav'
+bg_light_rain_path = bg_media_dir + bg_light_rain + '.wav'
+bg_thunder_lightning_rain_path = bg_media_dir + bg_thunder_lightning_rain + '.wav'
+
+# animal sound paths
+aml_media_path = mda_dir + aml_dir
+
+aml_killdeer_path = aml_media_path + aml_killdeer + '.wav'
+aml_american_woodcock_path = aml_media_path + aml_american_woodcock + '.wav'
+aml_peacock_path = aml_media_path + aml_peacock + '.wav'
+aml_crow_path = aml_media_path + aml_crow + '.wav'
+aml_meadowlark_path = aml_media_path + aml_meadowlark + '.wav'
+aml_warbling_vireo_path = aml_media_path + aml_warbling_vireo + '.wav'
+aml_quail_call_path = aml_media_path + aml_quail_call + '.wav'
+aml_crane_call_path = aml_media_path + aml_crane_call + '.wav'
+aml_tawny_owl_call_path = aml_media_path + aml_tawny_owl_call + '.wav'
+aml_cuckoo_bird_song_path = aml_media_path + aml_cuckoo_bird_song + '.wav'
+aml_eurasian_collared_dove_call_path = aml_media_path + \
+    aml_eurasian_collared_dove_call + '.wav'
+aml_woodpecker_pecking_path = aml_media_path + \
+    aml_woodpecker_pecking + '.wav'
+
+# not natural paths
+not_natural_media_path = mda_dir + not_natural_dir
+
+not_natural_blop_path = not_natural_media_path + not_natural_blop + '.wav'
+
+# -----> Init Pygame <-----
 
 # init pygame
 pygame.mixer.pre_init()
@@ -58,29 +83,53 @@ pygame.init()
 # set number of channels (default: 8)
 pygame.mixer.set_num_channels(500)
 
+device_status_sound_map = {
+    'idle':  pygame.mixer.Sound(aml_eurasian_collared_dove_call_path),
+    'lock_screen': pygame.mixer.Sound(aml_woodpecker_pecking_path),
+    'home_screen': pygame.mixer.Sound(aml_killdeer_path),
+    'off': pygame.mixer.Sound(aml_meadowlark_path),
+    'case_actions': pygame.mixer.Sound(aml_peacock_path),
+    'iphone': pygame.mixer.Sound(aml_quail_call_path),
+    'airpods_action': pygame.mixer.Sound(aml_crane_call_path),
+    'ipad': pygame.mixer.Sound(aml_cuckoo_bird_song_path),
+    'macos': pygame.mixer.Sound(aml_american_woodcock_path),
+    'airpods': pygame.mixer.Sound(aml_tawny_owl_call_path),
+    'beats': pygame.mixer.Sound(aml_crow_path),
+    'default': pygame.mixer.Sound(aml_warbling_vireo_path),
+    'not_natural': pygame.mixer.Sound('media/not_natural/blop.wav')
+}
+
+# -----> apple_bleee Data <-----
+
+
+state = {}
+
+# NOTE:
+# state structure example
+#
+# state = {
+#     'C8:69:CD:0E:13:E4': {
+#         'state': 'Disabled',
+#         'device': 'iPhone',
+#         'wifi': 'On',
+#         'os': 'iOS13',
+#         'phone': '',
+#         'time': 1581980104,
+#         'notes': ''
+#     },
+#     "...": {...}
+# }
+
 
 # -----> Init Background Audio <-----
 
-# has light thunder throughout
-bg_gentle_rain_path = mda_dir + bg_dir + bg_gentle_rain + '.wav'
-
-# better audio
-# more running water
-# short
-bg_light_rain_path = mda_dir + bg_dir + bg_light_rain + '.wav'
-
-bg_thunder_lightning_rain_path = mda_dir + \
-    bg_dir + bg_thunder_lightning_rain + '.wav'
-
-
 # load bg sound
-bg_path = mda_dir + bg_dir + bg_rainforest_ambiance + '.wav'
-pygame.mixer.music.load(bg_path)
+pygame.mixer.music.load(bg_rainforest_path)
 
 # set init bg sound volume
-pygame.mixer.music.set_volume(bg_sound_volume)
+pygame.mixer.music.set_volume(0.5)
 
-# init bg sound - loop forever
+# init bg sound and loop forever
 pygame.mixer.music.play(loops=-1)
 
 
@@ -88,103 +137,126 @@ pygame.mixer.music.play(loops=-1)
 
 
 def handle_new_data(data):
-    print("new data", data)
+    # print('new data')
+    # f = open("ble_forest.log", "a")
+    # f.write(". \n\n")
+    # f.close()
 
-# NOTE: switch example
-# def which_type(data):
-#     switch = {
-#         "os_a": "January",
-#         "os_b": "February",
-#     }
-
-#     	func = switch.get(data.type)
-#     	print(func, "invalid os")
-#     	return func
-
-# -----> Effect Handlers <-----
+    update_state(data)
 
 
-def play_sound(sound, sec, idx):
-    pygame.mixer.Channel(idx).play(sound, -1, sec)
-    # load bg sound
-    # bg_path = mda_dir + bg_dir + bg_rainforest_ambiance + '.wav'
-    # bg_sound = pygame.mixer.Sound(bg_path)
+def update_state(raw_data):
+    devices = raw_data.copy()
 
+    for dev in devices:
+        dev_data = devices[dev]
+
+        if dev in state:
+            if state[dev]['state'] != dev_data['state']:
+                handle_device_state_change(dev, dev_data)
+
+        if dev not in state:
+            handle_new_device(dev, dev_data)
+
+
+def handle_new_device(dev, dev_data):
+    # print('new device')
+    # f = open("ble_forest.log", "a")
+    # f.write("new device \n\n")
+    # f.close()
+
+    state[dev] = dev_data.copy()
+
+    sound = which_sound_device(dev_data['device'])
+    play_sound(sound)
+    set_bg_volume()
+
+
+def handle_device_state_change(dev, dev_data):
+    # print('device status has changed')
+    # f = open("ble_forest.log", "a")
+    # f.write("device status has changed \n\n")
+    # f.close()
+
+    sound = which_sound_state(dev_data['device'], dev_data['state'], dev)
+    play_sound(sound)
+
+
+def remove_from_state(dev):
+    # print('removing device')
+    # f = open("ble_forest.log", "a")
+    # f.write("removing device \n\n")
+    # f.close()
+
+    del state[dev]
+
+
+# -----> Sound Handlers <-----
+
+
+def set_bg_volume():
+    num_devices = len(state)
+
+    if num_devices <= 20:
+        pygame.mixer.music.set_volume(0.2)
+    elif num_devices > 40 and num_devices <= 30:
+        pygame.mixer.music.set_volume(0.4)
+    elif num_devices > 60 and num_devices <= 45:
+        pygame.mixer.music.set_volume(0.6)
+    elif num_devices > 80:
+        pygame.mixer.music.set_volume(0.8)
+    else:
+        pygame.mixer.music.set_volume(0.2)
+
+
+def which_sound_device(device):
+    if device == 'iPad':
+        return device_status_sound_map['ipad']
+    elif device == 'iPhone':
+        return device_status_sound_map['iphone']
+    elif device == 'MacOS':
+        return device_status_sound_map['macos']
+    elif device == 'AirPods':
+        return device_status_sound_map['airpods']
+    elif device == 'Powerbeats3' or 'BeatsX' or 'Beats Solo3':
+        return device_status_sound_map['beats']
+    else:
+        return device_status_sound_map['default']
+
+
+def which_sound_state(device, state, dev):
+    if device == 'iPad' or 'iPhone' or 'MacOS':
+        if state == 'Idle':
+            return device_status_sound_map['idle']
+        elif state == 'Lock screen':
+
+            if re.search(r'\b57:73\b', dev):
+                return device_status_sound_map['not_natural']
+            else:
+                return device_status_sound_map['lock_screen']
+
+        elif state == 'Home screen':
+            return device_status_sound_map['home_screen']
+        elif state == 'Off':
+            return device_status_sound_map['off']
+        else:
+            return device_status_sound_map['default']
+    elif device == 'AirPods' or 'Powerbeats3' or 'BeatsX' or 'Beats Solo3':
+        if state == 'Case:Closed' or 'Case:open':
+            return device_status_sound_map['case_action']
+        elif re.search(r'\bout\b', state) or re.search(r'\bin\b', state):
+            return device_status_sound_map['airpods_action']
+        else:
+            return device_status_sound_map['default']
+    else:
+        return device_status_sound_map['default']
+
+
+def play_sound(sound):
+    sound.set_volume(0.5)
+
+    # NOTE:
     # find_channel(): find and return an inactive Channel.
     # if no inactive channels and the force argument is True,
     # will find the Channel with the longest running Sound and return it.
-
-    # set init bg sound volume
-    # bg_sound.set_volume(bg_sound_volume)
-
-    # init bg sound - loop forever
-    # pygame.mixer.find_channel(True).play(bg_sound, -1)
-
-# -----> State Handlers <----- (may not need)
-
-
-# -----> Dev Helpers <-----
-
-
-### Rating For Effects ###
-
-# NOTE:
-# may want to randomize volume for every time
-# a sound is played. will "feel" more dynamic...?
-
-# good
-aml_killdeer_path = mda_dir + aml_dir + aml_killdeer + '.wav'
-aml_frogs_path = mda_dir + aml_dir + aml_frogs + '.wav'
-aml_american_woodcock_path = mda_dir + aml_dir + aml_american_woodcock + '.wav'
-aml_peacock_path = mda_dir + aml_dir + aml_peacock + '.wav'
-aml_crow_path = mda_dir + aml_dir + aml_crow + '.wav'
-aml_eurasian_collared_dove_call_path = mda_dir + \
-    aml_dir + aml_eurasian_collared_dove_call + '.wav'
-aml_woodpecker_pecking_path = mda_dir + aml_dir + \
-    aml_woodpecker_pecking + '.wav'  # don't overuse
-
-# long - needs edit
-aml_meadowlark_path = mda_dir + aml_dir + aml_meadowlark + '.wav'
-aml_warbling_vireo_path = mda_dir + aml_dir + aml_warbling_vireo + '.wav'
-aml_quail_call_path = mda_dir + aml_dir + aml_quail_call + '.wav'
-aml_crane_call_path = mda_dir + aml_dir + aml_crane_call + '.wav'
-aml_tawny_owl_call_path = mda_dir + aml_dir + aml_tawny_owl_call + '.wav'
-# potentially annoying...
-aml_cuckoo_bird_song_path = mda_dir + aml_dir + aml_cuckoo_bird_song + '.wav'
-
-CARL = [
-    aml_killdeer_path,
-    aml_frogs_path,
-    aml_american_woodcock_path,
-    aml_peacock_path,
-    aml_crow_path,
-    aml_eurasian_collared_dove_call_path,
-    aml_woodpecker_pecking_path,
-    aml_meadowlark_path,
-    aml_warbling_vireo_path,
-    aml_quail_call_path,
-    aml_crane_call_path,
-    aml_tawny_owl_call_path,
-    aml_cuckoo_bird_song_path,
-]
-duration = 0
-parth = ''
-
-# play sound randomly
-while True:
-    if random.randint(0, 1000000) == 10:
-        parth = CARL[random.randint(0, 12)]
-
-        test_animal_sound = pygame.mixer.Sound(parth)
-        test_animal_sound.set_volume(0.4)
-
-        duration = test_animal_sound.get_length()
-
-        print(parth, 'duration:', duration)
-        pygame.mixer.find_channel(True).play(test_animal_sound)
-        # pygame.mixer.find_channel(True).play(TEST_ANIMAL_sound, maxtime=500)
-
-        # pause for duration audio
-        time.sleep(3)
-
-# time.sleep(2000)
+    pygame.mixer.find_channel(True).play(sound)
