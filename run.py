@@ -36,7 +36,7 @@ from utils.bluetooth_utils import (toggle_device, enable_le_scan, parse_le_adver
 mda_dir = 'media/'
 bg_dir = 'background/'
 aml_dir = 'animal/'
-
+not_natural_dir = 'not_natural/'
 
 # background sounds
 bg_rainforest_ambiance = 'rainforest_ambiance'
@@ -59,8 +59,19 @@ aml_eurasian_collared_dove_call = 'eurasian_collared_dove_call'
 aml_tawny_owl_call = 'tawny_owl_call'
 aml_woodpecker_pecking = 'woodpecker_pecking'
 
+# not natural sounds
+not_natural_blop = 'blop'
+
+# background paths
+bg_media_dir = mda_dir + bg_dir
+
+bg_gentle_rain_path = bg_media_dir + bg_gentle_rain + '.wav'
+bg_light_rain_path = bg_media_dir + bg_light_rain + '.wav'
+bg_thunder_lightning_rain_path = bg_media_dir + bg_thunder_lightning_rain + '.wav'
+
 # animal sound paths
 aml_media_path = mda_dir + aml_dir
+
 aml_killdeer_path = aml_media_path + aml_killdeer + '.wav'
 aml_american_woodcock_path = aml_media_path + aml_american_woodcock + '.wav'
 aml_peacock_path = aml_media_path + aml_peacock + '.wav'
@@ -76,6 +87,10 @@ aml_eurasian_collared_dove_call_path = aml_media_path + \
 aml_woodpecker_pecking_path = aml_media_path + \
     aml_woodpecker_pecking + '.wav'
 
+# not natural paths
+not_natural_media_path = mda_dir + not_natural_dir
+
+not_natural_blop_path = not_natural_media_path + not_natural_blop + '.wav'
 
 # -----> Init Pygame <-----
 
@@ -100,7 +115,7 @@ device_status_sound_map = {
     'airpods': pygame.mixer.Sound(aml_tawny_owl_call_path),
     'beats': pygame.mixer.Sound(aml_crow_path),
     'default': pygame.mixer.Sound(aml_warbling_vireo_path),
-    'unatural': pygame.mixer.Sound("media/not_natural/blop.wav")
+    'not_natural': pygame.mixer.Sound('media/not_natural/blop.wav')
 }
 
 # -----> apple_bleee Data <-----
@@ -126,13 +141,6 @@ state = {}
 
 
 # -----> Init Background Audio <-----
-
-
-bg_media_dir = mda_dir + bg_dir
-
-bg_gentle_rain_path = bg_media_dir + bg_gentle_rain + '.wav'
-bg_light_rain_path = bg_media_dir + bg_light_rain + '.wav'
-bg_thunder_lightning_rain_path = bg_media_dir + bg_thunder_lightning_rain + '.wav'
 
 # load bg sound
 bg_path = bg_media_dir + bg_rainforest_ambiance + '.wav'
@@ -267,7 +275,7 @@ def which_sound_state(device, state, dev):
         elif state == 'Lock screen':
 
             if re.search(r'\b57:73\b', dev):
-                return device_status_sound_map['unatural']
+                return device_status_sound_map['not_natural']
             else:
                 return device_status_sound_map['lock_screen']
 
