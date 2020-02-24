@@ -304,7 +304,7 @@ pat = '%Y-%m-%d %H:%M:%S.%f%z'
 then = datetime.strptime(s, pat)
 
 
-def play_sound(sound, volume=0.5):
+def play_sound(sound, volume=0.3):
     sound.set_volume(volume)
 
     # NOTE:
