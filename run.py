@@ -99,7 +99,7 @@ not_natural_blop_path = not_natural_media_path + not_natural_blop + '.wav'
 pygame.mixer.pre_init()
 # pygame.mixer.init()
 
-pygame.mixer.init(48000, -16, 1, 8916)
+pygame.mixer.init(48000, -16, 1, 2048)
 # pygame.mixer.init(48000, -16, 1, 1024)
 
 pygame.init()
