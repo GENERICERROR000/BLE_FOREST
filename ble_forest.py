@@ -127,7 +127,7 @@ state = {}
 pygame.mixer.music.load(bg_rainforest_path)
 
 # set init bg sound volume
-pygame.mixer.music.set_volume(0.1)
+pygame.mixer.music.set_volume(0.5)
 
 # init bg sound and loop forever
 pygame.mixer.music.play(loops=-1)
@@ -198,13 +198,13 @@ def set_bg_volume():
     num_devices = len(state)
 
     if num_devices <= 20:
-        pygame.mixer.music.set_volume(0.1)
-    elif num_devices > 40 and num_devices <= 30:
         pygame.mixer.music.set_volume(0.2)
-    elif num_devices > 60 and num_devices <= 45:
+    elif num_devices > 40 and num_devices <= 30:
         pygame.mixer.music.set_volume(0.3)
-    elif num_devices > 80:
+    elif num_devices > 60 and num_devices <= 45:
         pygame.mixer.music.set_volume(0.4)
+    elif num_devices > 80:
+        pygame.mixer.music.set_volume(0.5)
     else:
         pygame.mixer.music.set_volume(0.2)
 
@@ -253,7 +253,7 @@ def which_sound_state(device, state, dev):
 
 
 def play_sound(sound):
-    sound.set_volume(0.1)
+    sound.set_volume(0.3)
 
     # NOTE:
     # find_channel(): find and return an inactive Channel.
