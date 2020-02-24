@@ -127,7 +127,7 @@ state = {}
 pygame.mixer.music.load(bg_rainforest_path)
 
 # set init bg sound volume
-pygame.mixer.music.set_volume(0.5)
+pygame.mixer.music.set_volume(0.1)
 
 # init bg sound and loop forever
 pygame.mixer.music.play(loops=-1)
