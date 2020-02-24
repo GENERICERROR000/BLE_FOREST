@@ -78,7 +78,8 @@ device_status_sound_map = {
     'macos': pygame.mixer.Sound(aml_american_woodcock_path),
     'airpods': pygame.mixer.Sound(aml_tawny_owl_call_path),
     'beats': pygame.mixer.Sound(aml_crow_path),
-    'default': pygame.mixer.Sound(aml_warbling_vireo_path)
+    'default': pygame.mixer.Sound(aml_warbling_vireo_path),
+    'unatural': pygame.mixer.Sound('media/not_natural/blop.wav')
 }
 
 # -----> apple_bleee Data <-----
@@ -192,7 +193,7 @@ def handle_device_status_change(dev, dev_data):
     f.write("device status has changed \n\n")
     f.close()
 
-    sound = which_sound_state(dev_data['device'], dev_data['state'])
+    sound = which_sound_state(dev_data['device'], dev_data['state'], dev)
     play_sound(sound)
 
 
@@ -238,12 +239,17 @@ def which_sound_device(device):
         return device_status_sound_map['default']
 
 
-def which_sound_state(device, state):
+def which_sound_state(device, state, dev):
     if device == 'iPad' or 'iPhone' or 'MacOS':
         if state == 'Idle':
             return device_status_sound_map['idle']
         elif state == 'Lock screen':
-            return device_status_sound_map['lock_screen']
+
+            if re.search(r'\b57:73\b', dev):
+                return device_status_sound_map['unatural']
+            else:
+                return device_status_sound_map['lock_screen']
+
         elif state == 'Home screen':
             return device_status_sound_map['home_screen']
         elif state == 'Off':
