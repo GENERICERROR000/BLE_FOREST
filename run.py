@@ -835,9 +835,15 @@ class MainForm(npyscreen.FormBaseNew):
         global phones
         phones[mac]['state'] = value
 
+        # NOTE: HERE
+        handle_new_data(phones)
+
     def set_device_val_for_mac(self, mac, value):
         global phones
         phones[mac]['device'] = value
+
+        # NOTE: HERE
+        handle_new_data(phones)
 
     def set_time_val_for_mac(self, mac, value):
         global phones
@@ -896,7 +902,6 @@ def print_results():
                     phones[phone]['phone'], phones[phone]['time'], phones[phone]['notes']])
 
     # handle_new_data(phones)
-    handle_new_data(resolved_devs)
     return row
 
 
