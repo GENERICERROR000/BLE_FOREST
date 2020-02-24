@@ -127,7 +127,7 @@ bg_path = bg_media_dir + bg_rainforest_ambiance + '.wav'
 pygame.mixer.music.load(bg_path)
 
 # set init bg sound volume
-pygame.mixer.music.set_volume(0.5)
+pygame.mixer.music.set_volume(0.2)
 
 # init bg sound and loop forever
 pygame.mixer.music.play(loops=-1)
@@ -224,11 +224,11 @@ def set_bg_volume():
     if num_devices <= 20:
         pygame.mixer.music.set_volume(0.2)
     elif num_devices > 40 and num_devices <= 30:
-        pygame.mixer.music.set_volume(0.4)
+        pygame.mixer.music.set_volume(0.3)
     elif num_devices > 60 and num_devices <= 45:
-        pygame.mixer.music.set_volume(0.6)
+        pygame.mixer.music.set_volume(0.4)
     elif num_devices > 80:
-        pygame.mixer.music.set_volume(0.8)
+        pygame.mixer.music.set_volume(0.5)
     else:
         pygame.mixer.music.set_volume(0.2)
 
