@@ -25,7 +25,6 @@ from threading import Thread, Timer
 import bluetooth._bluetooth as bluez
 from utils.bluetooth_utils import (toggle_device, enable_le_scan, parse_le_advertising_events, disable_le_scan,
                                    raw_packet_to_str, start_le_advertising, stop_le_advertising)
-from datetime import datetime, timedelta
 
 
 # -----> START CUSTOM CODE <-----
@@ -196,9 +195,9 @@ def update_state(raw_data):
             if state[dev]['state'] != dev_data['state']:
                 state[dev]['state'] = dev_data['state']
 
-                f = open("ble_forest.log", "a")
-                f.write("not equal!!!!! \n\n")
-                f.close()
+                # f = open("ble_forest.log", "a")
+                # f.write("not equal!!!!! \n\n")
+                # f.close()
                 handle_device_status_change(dev, dev_data)
 
         if dev not in state:
@@ -207,9 +206,9 @@ def update_state(raw_data):
 
 def handle_new_device(dev, dev_data):
     # print('new device')
-    f = open("ble_forest.log", "a")
-    f.write("new device \n\n")
-    f.close()
+    # f = open("ble_forest.log", "a")
+    # f.write("new device \n\n")
+    # f.close()
 
     state[dev] = dev_data.copy()
 
@@ -220,9 +219,9 @@ def handle_new_device(dev, dev_data):
 
 def handle_device_status_change(dev, dev_data):
     # print('device status has changed')
-    f = open("ble_forest.log", "a")
-    f.write("device status has changed \n\n")
-    f.close()
+    # f = open("ble_forest.log", "a")
+    # f.write("device status has changed \n\n")
+    # f.close()
 
     sound = which_sound_state(dev_data['device'], dev_data['state'], dev)
     play_sound(sound)
@@ -230,9 +229,9 @@ def handle_device_status_change(dev, dev_data):
 
 def remove_from_state(dev):
     # print('removing device')
-    f = open("ble_forest.log", "a")
-    f.write("removing device \n\n")
-    f.close()
+    # f = open("ble_forest.log", "a")
+    # f.write("removing device \n\n")
+    # f.close()
 
     del state[dev]
 
@@ -298,12 +297,6 @@ def which_sound_state(device, state, dev):
         return device_status_sound_map['default']
 
 
-s = '2017-01-13 14:12:18.307877+00:00'
-s = s[:-3]+s[-2:]
-pat = '%Y-%m-%d %H:%M:%S.%f%z'
-then = datetime.strptime(s, pat)
-
-
 def play_sound(sound, volume=0.3):
     sound.set_volume(volume)
 
@@ -311,8 +304,7 @@ def play_sound(sound, volume=0.3):
     # find_channel(): find and return an inactive Channel.
     # if no inactive channels and the force argument is True,
     # will find the Channel with the longest running Sound and return it.
-    if datetime.now(then.tzinfo) - then > timedelta(0, 10):
-        pygame.mixer.find_channel(True).play(sound)
+    pygame.mixer.find_channel(True).play(sound)
 
 
 # -----> END CUSTOM CODE <-----

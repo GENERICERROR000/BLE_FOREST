@@ -45,7 +45,6 @@ not_natural_blop = 'blop'
 # background paths
 bg_media_dir = mda_dir + bg_dir
 
-bg_rainforest_path = bg_media_dir + bg_rainforest_ambiance + '.wav'
 bg_gentle_rain_path = bg_media_dir + bg_gentle_rain + '.wav'
 bg_light_rain_path = bg_media_dir + bg_light_rain + '.wav'
 bg_thunder_lightning_rain_path = bg_media_dir + bg_thunder_lightning_rain + '.wav'
@@ -124,7 +123,8 @@ state = {}
 # -----> Init Background Audio <-----
 
 # load bg sound
-pygame.mixer.music.load(bg_rainforest_path)
+bg_path = bg_media_dir + bg_rainforest_ambiance + '.wav'
+pygame.mixer.music.load(bg_path)
 
 # set init bg sound volume
 pygame.mixer.music.set_volume(0.5)
@@ -137,6 +137,10 @@ pygame.mixer.music.play(loops=-1)
 
 
 def handle_new_data(data):
+
+    # NOTE: kill display
+    # npyscreen.blank_terminal()
+
     # print('new data')
     # f = open("ble_forest.log", "a")
     # f.write(". \n\n")
@@ -152,8 +156,28 @@ def update_state(raw_data):
         dev_data = devices[dev]
 
         if dev in state:
+            # TODO: WARN:
+            # 				this is probs not working the way i think it should
+            # if state != devices:
+            # f = open("ble_forest.log", "a")
+            # f.write("state ")
+            # f.write(str(state[dev]['state']))
+            # f.write("\n")
+
+            # f.write("new data ")
+            # f.write(str(dev_data['state']))
+            # f.write("\n")
+
+            # f.write(str(state[dev]['state'] != dev_data['state']))
+            # f.write("\n\n")
+            # f.close()
             if state[dev]['state'] != dev_data['state']:
-                handle_device_state_change(dev, dev_data)
+                state[dev]['state'] = dev_data['state']
+
+                # f = open("ble_forest.log", "a")
+                # f.write("not equal!!!!! \n\n")
+                # f.close()
+                handle_device_status_change(dev, dev_data)
 
         if dev not in state:
             handle_new_device(dev, dev_data)
@@ -172,7 +196,7 @@ def handle_new_device(dev, dev_data):
     set_bg_volume()
 
 
-def handle_device_state_change(dev, dev_data):
+def handle_device_status_change(dev, dev_data):
     # print('device status has changed')
     # f = open("ble_forest.log", "a")
     # f.write("device status has changed \n\n")
@@ -252,8 +276,8 @@ def which_sound_state(device, state, dev):
         return device_status_sound_map['default']
 
 
-def play_sound(sound):
-    sound.set_volume(0.5)
+def play_sound(sound, volume=0.3):
+    sound.set_volume(volume)
 
     # NOTE:
     # find_channel(): find and return an inactive Channel.
