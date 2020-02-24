@@ -96,13 +96,12 @@ not_natural_blop_path = not_natural_media_path + not_natural_blop + '.wav'
 # -----> Init Pygame <-----
 
 # init pygame
-# pygame.mixer.pre_init()
-pygame.mixer.pre_init(48000, -16, 1, 1024)
-# pygame.mixer.init(48000, -16, 1, 1024)
+pygame.mixer.pre_init()
+pygame.mixer.init(48000, -16, 1, 1024)
 pygame.init()
 
 # set number of channels (default: 8)
-pygame.mixer.set_num_channels(100)
+pygame.mixer.set_num_channels(200)
 
 device_status_sound_map = {
     'idle':  pygame.mixer.Sound(aml_eurasian_collared_dove_call_path),
