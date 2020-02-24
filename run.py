@@ -104,10 +104,10 @@ pygame.init()
 pygame.mixer.set_num_channels(500)
 
 device_status_sound_map = {
-    'idle':  pygame.mixer.Sound(aml_eurasian_collared_dove_call_path),
+    'idle':  pygame.mixer.Sound(aml_meadowlark_path),
     'lock_screen': pygame.mixer.Sound(aml_woodpecker_pecking_path),
     'home_screen': pygame.mixer.Sound(aml_killdeer_path),
-    'off': pygame.mixer.Sound(aml_meadowlark_path),
+    'off': pygame.mixer.Sound(aml_eurasian_collared_dove_call_path),
     'case_actions': pygame.mixer.Sound(aml_peacock_path),
     'iphone': pygame.mixer.Sound(aml_quail_call_path),
     'airpods_action': pygame.mixer.Sound(aml_crane_call_path),
@@ -247,9 +247,9 @@ def set_bg_volume():
     elif num_devices > 40 and num_devices <= 30:
         pygame.mixer.music.set_volume(0.3)
     elif num_devices > 60 and num_devices <= 45:
-        pygame.mixer.music.set_volume(0.4)
+        pygame.mixer.music.set_volume(0.35)
     elif num_devices > 80:
-        pygame.mixer.music.set_volume(0.5)
+        pygame.mixer.music.set_volume(0.4)
     else:
         pygame.mixer.music.set_volume(0.2)
 
