@@ -34,7 +34,7 @@ from utils.bluetooth_utils import (toggle_device, enable_le_scan, parse_le_adver
 
 
 # dirs
-mda_dir = 'media/'
+mda_dir = '/home/pi/BLE_FOREST/media/'
 bg_dir = 'background/'
 aml_dir = 'animal/'
 not_natural_dir = 'not_natural/'
@@ -308,7 +308,6 @@ def play_sound(sound, volume=0.3):
 
 
 # -----> END CUSTOM CODE <-----
-
 
 help_desc = '''
 Apple bleee. Apple device sniffer
