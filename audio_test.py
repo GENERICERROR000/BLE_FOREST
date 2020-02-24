@@ -3,6 +3,7 @@
 # authors: Noah Kernis & Sue Roh
 
 import pygame
+import time
 
 mda_dir = 'media/'
 bg_dir = 'background/'
@@ -22,3 +23,5 @@ pygame.mixer.music.set_volume(0.3)
 
 # init bg sound and loop forever
 pygame.mixer.music.play(loops=-1)
+
+time.sleep(2000)
