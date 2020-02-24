@@ -95,7 +95,7 @@ device_status_sound_map = {
     'airpods': pygame.mixer.Sound(aml_tawny_owl_call_path),
     'beats': pygame.mixer.Sound(aml_crow_path),
     'default': pygame.mixer.Sound(aml_warbling_vireo_path),
-    'not_natural': pygame.mixer.Sound('media/not_natural/blop.wav')
+    'not_natural': pygame.mixer.Sound('/home/pi/BLE_FOREST/media/not_natural/blop.wav')
 }
 
 # -----> apple_bleee Data <-----
