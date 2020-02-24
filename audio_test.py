@@ -7,7 +7,7 @@ import time
 
 mda_dir = 'media/'
 bg_dir = 'background/'
-bg_rainforest_ambiance = 'rainforest_ambiance_01'
+bg_rainforest_ambiance = 'rainforest_ambiance'
 bg_media_dir = mda_dir + bg_dir
 bg_rainforest_path = bg_media_dir + bg_rainforest_ambiance + '.wav'
 
