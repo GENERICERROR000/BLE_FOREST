@@ -25,6 +25,8 @@ from threading import Thread, Timer
 import bluetooth._bluetooth as bluez
 from utils.bluetooth_utils import (toggle_device, enable_le_scan, parse_le_advertising_events, disable_le_scan,
                                    raw_packet_to_str, start_le_advertising, stop_le_advertising)
+from datetime import datetime, timedelta
+
 
 # -----> START CUSTOM CODE <-----
 
@@ -296,6 +298,12 @@ def which_sound_state(device, state, dev):
         return device_status_sound_map['default']
 
 
+s = '2017-01-13 14:12:18.307877+00:00'
+s = s[:-3]+s[-2:]
+pat = '%Y-%m-%d %H:%M:%S.%f%z'
+then = datetime.strptime(s, pat)
+
+
 def play_sound(sound, volume=0.5):
     sound.set_volume(volume)
 
@@ -303,7 +311,8 @@ def play_sound(sound, volume=0.5):
     # find_channel(): find and return an inactive Channel.
     # if no inactive channels and the force argument is True,
     # will find the Channel with the longest running Sound and return it.
-    pygame.mixer.find_channel(True).play(sound)
+    if datetime.now(then.tzinfo) - then > timedelta(0, 5):
+        pygame.mixer.find_channel(True).play(sound)
 
 
 # -----> END CUSTOM CODE <-----
