@@ -153,12 +153,10 @@ def handle_new_data(data):
 
     # print('new data')
     f = open("ble_forest.log", "a")
-    # f.write(". \n\n")
-    f.write(str(data))
-    f.write("\n\n")
+    f.write(". \n\n")
     f.close()
 
-    # update_state(data)
+    update_state(data)
 
 
 def update_state(raw_data):
@@ -200,13 +198,6 @@ def handle_new_device(dev, dev_data):
     f.close()
 
     state[dev] = dev_data
-
-    carl = state[dev]
-
-    f = open("ble_forest.log", "a")
-    f.write(str(carl))
-    f.write("\n\n")
-    f.close()
 
     sound = which_sound_device(dev_data['device'])
     play_sound(sound)
@@ -299,7 +290,6 @@ def play_sound(sound, volume=0.5):
 
 
 # -----> END CUSTOM CODE <-----
-
 help_desc = '''
 Apple bleee. Apple device sniffer
 ---chipik

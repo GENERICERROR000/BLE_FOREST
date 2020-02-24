@@ -179,13 +179,6 @@ def handle_new_device(dev, dev_data):
 
     state[dev] = dev_data
 
-    carl = state[dev]
-
-    f = open("ble_forest.log", "a")
-    f.write(str(carl))
-    f.write("\n\n")
-    f.close()
-
     sound = which_sound_device(dev_data['device'])
     play_sound(sound)
     set_bg_volume()
